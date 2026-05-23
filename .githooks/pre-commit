@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "Running Mateclaw project rule checks..."
+dart run scripts/check_project_rules.dart --staged
+
+echo "Running Flutter analyzer..."
+flutter analyze
+
+echo "Running custom_lint..."
+dart run custom_lint
