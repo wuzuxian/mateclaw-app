@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "loginBrandMate": "Mate",
+  "loginBrandClaw": "Claw",
+  "loginSubtitle": "Sign in to your AI workspace",
+  "loginUsernameHint": "Enter username",
+  "loginPasswordHint": "Enter password",
+  "loginAgreementPrefix": "I have read and agree to",
+  "loginAgreementTerms": "User Agreement",
+  "loginAgreementAnd": " and ",
+  "loginAgreementPrivacy": "Privacy Policy",
+  "loginButton": "Log in",
+  "loginTogglePasswordVisibility": "Toggle password visibility",
+  "loginToggleAgreement": "Toggle agreement consent"
+}

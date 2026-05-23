@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'l10n/app_localizations.dart';
 import 'routing/app_router.dart';
 
 class MateclawApp extends StatelessWidget {
@@ -11,14 +12,17 @@ class MateclawApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Mateclaw',
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('zh'), Locale('en')],
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: appRouter,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF007AFF)),
+        fontFamily: 'SF Pro Display',
+        useMaterial3: true,
       ),
     );
   }

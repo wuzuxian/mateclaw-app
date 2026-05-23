@@ -1,0 +1,15 @@
+{
+  "@@locale": "zh",
+  "loginBrandMate": "Mate",
+  "loginBrandClaw": "Claw",
+  "loginSubtitle": "登录你的 AI 工作台",
+  "loginUsernameHint": "请输入用户名",
+  "loginPasswordHint": "请输入密码",
+  "loginAgreementPrefix": "我已阅读并同意",
+  "loginAgreementTerms": "用户协议",
+  "loginAgreementAnd": " 和 ",
+  "loginAgreementPrivacy": "隐私政策",
+  "loginButton": "登录",
+  "loginTogglePasswordVisibility": "切换密码可见性",
+  "loginToggleAgreement": "切换协议勾选状态"
+}
