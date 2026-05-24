@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../../../core/debug/debug_log.dart';
 import '../../../core/storage/app_database.dart';
 import 'auth_models.dart';
 
@@ -19,6 +20,7 @@ class SqfliteAuthSessionStore implements AuthSessionStore {
 
   @override
   Future<AuthSessionState?> read() async {
+    debugLog('AuthSessionStore.read start');
     final rows = await (await _openDatabase()).query(
       _sessionTable,
       where: 'id = ?',
@@ -26,16 +28,18 @@ class SqfliteAuthSessionStore implements AuthSessionStore {
       limit: 1,
     );
     if (rows.isEmpty) {
+      debugLog('AuthSessionStore.read empty');
       return null;
     }
 
     final row = rows.first;
     final token = row['token'] as String? ?? '';
     if (token.isEmpty) {
+      debugLog('AuthSessionStore.read token empty');
       return null;
     }
 
-    return AuthSessionState(
+    final state = AuthSessionState(
       token: token,
       user: AuthUser(
         id: row['user_id'] as int? ?? 0,
@@ -44,10 +48,27 @@ class SqfliteAuthSessionStore implements AuthSessionStore {
         role: row['role'] as String? ?? '',
       ),
     );
+    debugLog(
+      'AuthSessionStore.read success',
+      data: {
+        'userId': state.user.id,
+        'username': state.user.username,
+        'tokenLength': state.token.length,
+      },
+    );
+    return state;
   }
 
   @override
   Future<void> save(AuthSessionState state) async {
+    debugLog(
+      'AuthSessionStore.save',
+      data: {
+        'userId': state.user.id,
+        'username': state.user.username,
+        'tokenLength': state.token.length,
+      },
+    );
     await (await _openDatabase()).insert(_sessionTable, {
       'id': _sessionId,
       'token': state.token,
@@ -61,6 +82,7 @@ class SqfliteAuthSessionStore implements AuthSessionStore {
 
   @override
   Future<void> clear() async {
+    debugLog('AuthSessionStore.clear');
     await (await _openDatabase()).delete(
       _sessionTable,
       where: 'id = ?',

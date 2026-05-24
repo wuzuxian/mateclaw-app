@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
+import '../../../core/debug/debug_log.dart';
 import '../../../core/network/api_client.dart';
 import '../data/auth_repository.dart';
 import 'auth_session.dart';
@@ -44,6 +45,10 @@ class LoginViewModel extends ChangeNotifier {
     _isLoading = true;
     _error = null;
     notifyListeners();
+    debugLog(
+      'LoginViewModel.login start',
+      data: {'username': normalizedUsername},
+    );
 
     try {
       final session = await _authRepository.login(
@@ -51,15 +56,29 @@ class LoginViewModel extends ChangeNotifier {
         password: password,
       );
       await _authSession.update(session);
+      debugLog(
+        'LoginViewModel.login success',
+        data: {'userId': session.user.id, 'username': session.user.username},
+      );
       _isLoading = false;
       notifyListeners();
       return true;
     } on ApiException catch (error) {
+      debugLog(
+        'LoginViewModel.login api error',
+        data: {
+          'type': error.type.name,
+          'statusCode': error.statusCode,
+          'apiCode': error.apiCode,
+          'message': error.message,
+        },
+      );
       _isLoading = false;
       _error = _mapApiException(error);
       notifyListeners();
       return false;
     } catch (_) {
+      debugLog('LoginViewModel.login unknown error');
       _isLoading = false;
       _error = LoginError.unknown;
       notifyListeners();

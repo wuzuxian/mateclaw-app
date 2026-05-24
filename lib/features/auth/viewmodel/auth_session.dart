@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
+import '../../../core/debug/debug_log.dart';
 import '../data/auth_models.dart';
 import '../data/auth_session_store.dart';
 
@@ -22,10 +23,21 @@ class AuthSession extends ChangeNotifier {
   AuthUser? get user => _state?.user;
 
   Future<void> restore() async {
+    debugLog('AuthSession.restore start');
     try {
       _state = await _store.read();
+      debugLog(
+        'AuthSession.restore loaded',
+        data: {
+          'hasState': _state != null,
+          'isAuthenticated': isAuthenticated,
+          'userId': _state?.user.id,
+          'username': _state?.user.username,
+        },
+      );
     } catch (_) {
       _state = null;
+      debugLog('AuthSession.restore failed');
     } finally {
       _isInitialized = true;
       notifyListeners();
@@ -33,18 +45,26 @@ class AuthSession extends ChangeNotifier {
   }
 
   Future<void> update(AuthSessionState state) async {
+    debugLog(
+      'AuthSession.update start',
+      data: {'userId': state.user.id, 'username': state.user.username},
+    );
     await _store.save(state);
     _state = state;
+    debugLog(
+      'AuthSession.update done',
+      data: {'userId': state.user.id, 'isAuthenticated': isAuthenticated},
+    );
     notifyListeners();
   }
 
   Future<void> clear() async {
-    if (_state == null) {
-      return;
-    }
-
-    await _store.clear();
+    debugLog('AuthSession.clear start');
+    try {
+      await _store.clear();
+    } catch (_) {}
     _state = null;
+    debugLog('AuthSession.clear done');
     notifyListeners();
   }
 

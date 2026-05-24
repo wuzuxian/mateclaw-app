@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:sqflite/sqflite.dart';
 
+import '../../../core/debug/debug_log.dart';
 import '../../../core/storage/app_database.dart';
 import 'home_models.dart';
 
@@ -18,22 +19,33 @@ class HomeCacheStore {
 
   Future<HomeUserProfile?> readProfile(int userId) async {
     if (!await _isOwner(userId)) {
+      debugLog(
+        'HomeCacheStore.readProfile owner mismatch',
+        data: {'userId': userId},
+      );
       return null;
     }
 
+    debugLog('HomeCacheStore.readProfile start', data: {'userId': userId});
     final rows = await (await AppDatabase.open()).query(
       _profileTable,
       orderBy: 'updated_at DESC',
       limit: 1,
     );
     if (rows.isEmpty) {
+      debugLog('HomeCacheStore.readProfile empty', data: {'userId': userId});
       return null;
     }
 
+    debugLog('HomeCacheStore.readProfile hit', data: {'userId': userId});
     return _profileFromRow(rows.first);
   }
 
   Future<void> saveProfile(int userId, HomeUserProfile profile) async {
+    debugLog(
+      'HomeCacheStore.saveProfile start',
+      data: {'userId': userId, 'profileId': profile.id},
+    );
     await _prepareOwner(userId);
     await (await AppDatabase.open()).insert(_profileTable, {
       'id': profile.id,
@@ -49,9 +61,17 @@ class HomeCacheStore {
 
   Future<int?> readDefaultWorkspaceId(int userId) async {
     if (!await _isOwner(userId)) {
+      debugLog(
+        'HomeCacheStore.readDefaultWorkspaceId owner mismatch',
+        data: {'userId': userId},
+      );
       return null;
     }
 
+    debugLog(
+      'HomeCacheStore.readDefaultWorkspaceId start',
+      data: {'userId': userId},
+    );
     final rows = await (await AppDatabase.open()).query(
       _workspaceStateTable,
       columns: ['default_workspace_id'],
@@ -60,22 +80,40 @@ class HomeCacheStore {
       limit: 1,
     );
     if (rows.isEmpty) {
+      debugLog(
+        'HomeCacheStore.readDefaultWorkspaceId empty',
+        data: {'userId': userId},
+      );
       return null;
     }
 
-    return rows.first['default_workspace_id'] as int?;
+    final workspaceId = rows.first['default_workspace_id'] as int?;
+    debugLog(
+      'HomeCacheStore.readDefaultWorkspaceId hit',
+      data: {'userId': userId, 'workspaceId': workspaceId},
+    );
+    return workspaceId;
   }
 
   Future<List<HomeWorkspace>> readWorkspaces(int userId) async {
     if (!await _isOwner(userId)) {
+      debugLog(
+        'HomeCacheStore.readWorkspaces owner mismatch',
+        data: {'userId': userId},
+      );
       return const [];
     }
 
+    debugLog('HomeCacheStore.readWorkspaces start', data: {'userId': userId});
     final rows = await (await AppDatabase.open()).query(
       _workspaceTable,
       orderBy: 'is_default DESC, updated_at DESC',
     );
 
+    debugLog(
+      'HomeCacheStore.readWorkspaces hit',
+      data: {'userId': userId, 'workspaceCount': rows.length},
+    );
     return rows.map(_workspaceFromRow).toList(growable: false);
   }
 
@@ -84,6 +122,14 @@ class HomeCacheStore {
     required int defaultWorkspaceId,
     required List<HomeWorkspace> workspaces,
   }) async {
+    debugLog(
+      'HomeCacheStore.saveWorkspaces start',
+      data: {
+        'userId': userId,
+        'defaultWorkspaceId': defaultWorkspaceId,
+        'workspaceCount': workspaces.length,
+      },
+    );
     await _prepareOwner(userId);
     final database = await AppDatabase.open();
     await database.transaction((transaction) async {
@@ -115,9 +161,17 @@ class HomeCacheStore {
     required int workspaceId,
   }) async {
     if (!await _isOwner(userId)) {
+      debugLog(
+        'HomeCacheStore.readHomeSnapshot owner mismatch',
+        data: {'userId': userId, 'workspaceId': workspaceId},
+      );
       return null;
     }
 
+    debugLog(
+      'HomeCacheStore.readHomeSnapshot start',
+      data: {'userId': userId, 'workspaceId': workspaceId},
+    );
     final rows = await (await AppDatabase.open()).query(
       _homeSnapshotTable,
       columns: ['payload_json'],
@@ -126,6 +180,10 @@ class HomeCacheStore {
       limit: 1,
     );
     if (rows.isEmpty) {
+      debugLog(
+        'HomeCacheStore.readHomeSnapshot empty',
+        data: {'userId': userId, 'workspaceId': workspaceId},
+      );
       return null;
     }
 
@@ -134,12 +192,24 @@ class HomeCacheStore {
     try {
       decoded = jsonDecode(payloadJson);
     } on FormatException {
+      debugLog(
+        'HomeCacheStore.readHomeSnapshot invalid payload',
+        data: {'userId': userId, 'workspaceId': workspaceId},
+      );
       return null;
     }
     if (decoded is! Map<String, Object?>) {
+      debugLog(
+        'HomeCacheStore.readHomeSnapshot unexpected payload',
+        data: {'userId': userId, 'workspaceId': workspaceId},
+      );
       return null;
     }
 
+    debugLog(
+      'HomeCacheStore.readHomeSnapshot hit',
+      data: {'userId': userId, 'workspaceId': workspaceId},
+    );
     return HomeSnapshot.fromJson(decoded);
   }
 
@@ -148,12 +218,27 @@ class HomeCacheStore {
     required int workspaceId,
     required Map<String, Object?> payload,
   }) async {
+    debugLog(
+      'HomeCacheStore.saveHomeSnapshot start',
+      data: {'userId': userId, 'workspaceId': workspaceId},
+    );
     await _prepareOwner(userId);
     await (await AppDatabase.open()).insert(_homeSnapshotTable, {
       'workspace_id': workspaceId,
       'payload_json': jsonEncode(payload),
       'updated_at': DateTime.now().millisecondsSinceEpoch,
     }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<void> clear() async {
+    debugLog('HomeCacheStore.clear');
+    final database = await AppDatabase.open();
+    await database.transaction((transaction) async {
+      await transaction.delete(_profileTable);
+      await transaction.delete(_workspaceTable);
+      await transaction.delete(_workspaceStateTable);
+      await transaction.delete(_homeSnapshotTable);
+    });
   }
 
   Future<bool> _isOwner(int userId) async {
@@ -165,17 +250,36 @@ class HomeCacheStore {
       limit: 1,
     );
     if (rows.isEmpty) {
+      debugLog(
+        'HomeCacheStore._isOwner missing owner',
+        data: {'userId': userId},
+      );
       return false;
     }
 
-    return rows.first['user_id'] == userId;
+    final isOwner = rows.first['user_id'] == userId;
+    if (!isOwner) {
+      debugLog(
+        'HomeCacheStore._isOwner mismatch',
+        data: {'userId': userId, 'ownerUserId': rows.first['user_id']},
+      );
+    }
+    return isOwner;
   }
 
   Future<void> _prepareOwner(int userId) async {
     if (await _isOwner(userId)) {
+      debugLog(
+        'HomeCacheStore._prepareOwner already owned',
+        data: {'userId': userId},
+      );
       return;
     }
 
+    debugLog(
+      'HomeCacheStore._prepareOwner switch owner',
+      data: {'userId': userId},
+    );
     final database = await AppDatabase.open();
     await database.transaction((transaction) async {
       await transaction.delete(_profileTable);

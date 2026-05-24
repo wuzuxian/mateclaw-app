@@ -179,6 +179,7 @@ List<_Violation> _checkProjectConventionDocs() {
     '每次开始开发前，开发者和 AI 助手都必须先阅读本文档': 'Missing pre-development reading rule.',
     '多屏幕尺寸适配必须优先使用浮动布局': 'Missing multi-screen floating layout rule.',
     '单个页面和可复用组件必须单独一个文件': 'Missing single-responsibility file boundary rule.',
+    '关键数据流必须补充 `debugLog`': 'Missing debug logging rule for key data flows.',
   };
 
   return [

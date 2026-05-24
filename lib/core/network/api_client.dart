@@ -21,6 +21,8 @@ class ApiClient {
   final String? Function()? _authorizationTokenProvider;
   final HttpClient _httpClient;
 
+  Uri get baseUri => _baseUri;
+
   Future<ApiResponse> getJson(
     String path, {
     Map<String, Object?> queryParameters = const {},
@@ -91,6 +93,27 @@ class ApiClient {
       throw ApiException(type: ApiExceptionType.network);
     } on HandshakeException {
       throw const ApiException(type: ApiExceptionType.network);
+    }
+  }
+
+  Future<bool> canReachBackend({
+    Duration timeout = const Duration(seconds: 3),
+  }) async {
+    try {
+      final socket = await Socket.connect(
+        _baseUri.host,
+        _baseUri.hasPort
+            ? _baseUri.port
+            : switch (_baseUri.scheme) {
+                'https' => 443,
+                _ => 80,
+              },
+        timeout: timeout,
+      );
+      socket.destroy();
+      return true;
+    } catch (_) {
+      return false;
     }
   }
 

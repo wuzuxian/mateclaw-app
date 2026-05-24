@@ -8,14 +8,14 @@ class AuthUser {
 
   factory AuthUser.fromJson(Map<String, Object?> json) {
     return AuthUser(
-      id: switch (json['id']) {
-        final int value => value,
-        final String value => int.tryParse(value) ?? 0,
-        _ => 0,
-      },
-      username: json['username'] as String? ?? '',
-      nickname: json['nickname'] as String? ?? '',
-      role: json['role'] as String? ?? '',
+      id: _intValue(_pick(json, ['id', 'userId', 'user_id'])),
+      username: _stringValue(
+        _pick(json, ['username', 'userName', 'user_name']),
+      ),
+      nickname: _stringValue(
+        _pick(json, ['nickname', 'nickName', 'nick_name']),
+      ),
+      role: _stringValue(_pick(json, ['role', 'userRole', 'user_role'])),
     );
   }
 
@@ -38,4 +38,29 @@ class AuthSessionState {
   Map<String, Object?> toJson() {
     return {'token': token, 'user': user.toJson()};
   }
+}
+
+Object? _pick(Map<String, Object?> json, List<String> keys) {
+  for (final key in keys) {
+    if (json.containsKey(key)) {
+      return json[key];
+    }
+  }
+  return null;
+}
+
+int _intValue(Object? value) {
+  return switch (value) {
+    final int value => value,
+    final String value => int.tryParse(value) ?? 0,
+    _ => 0,
+  };
+}
+
+String _stringValue(Object? value) {
+  return switch (value) {
+    final String value => value,
+    final num value => value.toString(),
+    _ => '',
+  };
 }

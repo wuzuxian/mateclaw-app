@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../../core/debug/debug_log.dart';
 import '../../../core/network/api_client.dart';
 import '../data/home_models.dart';
 import '../data/home_repository.dart';
@@ -25,22 +26,44 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> load() async {
     if (_hasLoaded) {
+      debugLog('HomeViewModel.load skipped');
       return;
     }
     _hasLoaded = true;
 
     _isLoading = true;
     notifyListeners();
+    debugLog('HomeViewModel.load start');
 
     HomeDashboardData? cachedData;
     try {
       cachedData = await _repository.readCachedHome();
+      debugLog(
+        'HomeViewModel.load cache result',
+        data: {
+          'hasCachedData': cachedData != null,
+          'workspaceId': cachedData?.workspaceId,
+        },
+      );
     } catch (_) {
+      debugLog('HomeViewModel.load cache read failed');
       cachedData = null;
     }
     if (cachedData != null) {
       _data = cachedData;
       notifyListeners();
+    }
+
+    final canReachBackend = await _repository.canReachBackend();
+    debugLog(
+      'HomeViewModel.load backend reachability',
+      data: {'canReachBackend': canReachBackend},
+    );
+    if (!canReachBackend) {
+      _error = cachedData == null ? HomeLoadError.network : null;
+      _isLoading = false;
+      notifyListeners();
+      return;
     }
 
     await refresh();
@@ -50,12 +73,56 @@ class HomeViewModel extends ChangeNotifier {
     _isLoading = true;
     _error = null;
     notifyListeners();
+    debugLog('HomeViewModel.refresh start');
+
+    final canReachBackend = await _repository.canReachBackend();
+    debugLog(
+      'HomeViewModel.refresh backend reachability',
+      data: {'canReachBackend': canReachBackend},
+    );
+    if (!canReachBackend) {
+      if (_data == null) {
+        try {
+          _data = await _repository.readCachedHome();
+          debugLog(
+            'HomeViewModel.refresh cache fallback',
+            data: {'hasCachedData': _data != null},
+          );
+        } catch (_) {}
+      }
+      if (_data == null) {
+        _error = HomeLoadError.network;
+      }
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }
 
     try {
       _data = await _repository.refreshHome();
+      debugLog(
+        'HomeViewModel.refresh success',
+        data: {
+          'workspaceId': _data?.workspaceId,
+          'isFromCache': _data?.isFromCache,
+        },
+      );
     } on ApiException catch (error) {
-      _error = HomeLoadError.fromApiException(error);
+      final loadError = HomeLoadError.fromApiException(error);
+      debugLog(
+        'HomeViewModel.refresh api error',
+        data: {
+          'type': error.type.name,
+          'statusCode': error.statusCode,
+          'apiCode': error.apiCode,
+          'mappedError': loadError.name,
+        },
+      );
+      if (_data == null || loadError != HomeLoadError.invalidResponse) {
+        _error = loadError;
+      }
     } catch (_) {
+      debugLog('HomeViewModel.refresh unknown error');
       _error = HomeLoadError.unknown;
     } finally {
       _isLoading = false;
