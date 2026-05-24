@@ -112,4 +112,97 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeTabSettings => '设置';
+
+  @override
+  String get chatKicker => 'Chat';
+
+  @override
+  String get chatTitle => '对话';
+
+  @override
+  String get chatSearchHint => '搜索会话、Agent 或渠道';
+
+  @override
+  String get chatNewConversation => '新建对话';
+
+  @override
+  String get chatNewConversationSubtitle => '选择 Agent，开始一次新的任务';
+
+  @override
+  String get chatRecentConversations => '最近对话';
+
+  @override
+  String get chatRecentCount => '24';
+
+  @override
+  String get chatContractAgent => '合同审查 Agent';
+
+  @override
+  String get chatContractTime => '09:32';
+
+  @override
+  String get chatContractPreview => '发现 3 个高风险点，建议先补充验收条件...';
+
+  @override
+  String get chatContractStatus => '工具完成';
+
+  @override
+  String get chatContractMessageCount => '12 条消息';
+
+  @override
+  String get chatDataAgent => '数据分析 Agent';
+
+  @override
+  String get chatDataTime => '昨天';
+
+  @override
+  String get chatDataPreview => '已生成本周经营指标摘要和异常说明。';
+
+  @override
+  String get chatDataMeta => '8 条消息 · MySQL 数据源';
+
+  @override
+  String get chatSupportAgent => '客服助理 Agent';
+
+  @override
+  String get chatSupportTime => '周二';
+
+  @override
+  String get chatSupportPreview => '客户希望确认退款进度，已同步工单状态。';
+
+  @override
+  String get chatSupportMeta => '微信渠道 · 5 条消息';
+
+  @override
+  String get chatDailyTask => '日报摘要任务';
+
+  @override
+  String get chatDailyPreview => 'Cron 触发 · 成功完成';
+
+  @override
+  String get chatDetailMeta => 'ReAct · 在线 · GPT-4.1';
+
+  @override
+  String get chatDetailTimestamp => '今天 09:32';
+
+  @override
+  String get chatUserMessage => '帮我检查这份采购合同，重点看付款条款和违约责任。';
+
+  @override
+  String get chatBotMessage => '已完成初审。发现 3 个高风险点，建议先补充验收条件，再调整逾期付款宽限期。';
+
+  @override
+  String get chatRiskPayment => '高风险 · 付款节点不明确';
+
+  @override
+  String get chatRiskLiability => '中风险 · 违约金上限缺失';
+
+  @override
+  String get chatToolComplete => '工具调用完成';
+
+  @override
+  String get chatToolMeta => '合同解析器 · 法务知识库 · 1.8s';
+
+  @override
+  String get chatInputHint => '输入消息或上传文件';
 }

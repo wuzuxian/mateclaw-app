@@ -112,4 +112,103 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeTabSettings => 'Settings';
+
+  @override
+  String get chatKicker => 'Chat';
+
+  @override
+  String get chatTitle => 'Chat';
+
+  @override
+  String get chatSearchHint => 'Search chats, Agents, or channels';
+
+  @override
+  String get chatNewConversation => 'New conversation';
+
+  @override
+  String get chatNewConversationSubtitle =>
+      'Choose an Agent and start a new task';
+
+  @override
+  String get chatRecentConversations => 'Recent conversations';
+
+  @override
+  String get chatRecentCount => '24';
+
+  @override
+  String get chatContractAgent => 'Contract review Agent';
+
+  @override
+  String get chatContractTime => '09:32';
+
+  @override
+  String get chatContractPreview =>
+      'Found 3 high-risk points. Add acceptance criteria first...';
+
+  @override
+  String get chatContractStatus => 'Tool complete';
+
+  @override
+  String get chatContractMessageCount => '12 messages';
+
+  @override
+  String get chatDataAgent => 'Data analysis Agent';
+
+  @override
+  String get chatDataTime => 'Yesterday';
+
+  @override
+  String get chatDataPreview =>
+      'Generated this week\'s operating summary and anomaly notes.';
+
+  @override
+  String get chatDataMeta => '8 messages · MySQL source';
+
+  @override
+  String get chatSupportAgent => 'Support assistant Agent';
+
+  @override
+  String get chatSupportTime => 'Tue';
+
+  @override
+  String get chatSupportPreview =>
+      'Customer asked about refund progress; ticket status synced.';
+
+  @override
+  String get chatSupportMeta => 'WeChat channel · 5 messages';
+
+  @override
+  String get chatDailyTask => 'Daily summary task';
+
+  @override
+  String get chatDailyPreview => 'Cron triggered · Completed';
+
+  @override
+  String get chatDetailMeta => 'ReAct · Online · GPT-4.1';
+
+  @override
+  String get chatDetailTimestamp => 'Today 09:32';
+
+  @override
+  String get chatUserMessage =>
+      'Please review this purchase contract, especially payment terms and liability.';
+
+  @override
+  String get chatBotMessage =>
+      'Initial review complete. Found 3 high-risk points. Add acceptance criteria first, then adjust the grace period for overdue payments.';
+
+  @override
+  String get chatRiskPayment => 'High risk · Payment milestones unclear';
+
+  @override
+  String get chatRiskLiability => 'Medium risk · Penalty cap missing';
+
+  @override
+  String get chatToolComplete => 'Tool call complete';
+
+  @override
+  String get chatToolMeta => 'Contract parser · Legal knowledge base · 1.8s';
+
+  @override
+  String get chatInputHint => 'Type a message or upload a file';
 }

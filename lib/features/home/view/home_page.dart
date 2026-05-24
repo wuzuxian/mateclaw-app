@@ -82,15 +82,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const _PlaceholderTabPage(tab: _HomeTab.chat);
-  }
-}
-
 class AgentPage extends StatelessWidget {
   const AgentPage({super.key});
 
@@ -177,17 +168,19 @@ class _ScaledPrototypeCanvas extends StatelessWidget {
         final scaledWidth = HomePage._prototypeWidth * scale;
         final scaledHeight = HomePage._prototypeSafeHeight * scale;
 
-        return Center(
-          child: SizedBox(
-            width: scaledWidth,
-            height: scaledHeight,
-            child: Transform.scale(
-              scale: scale,
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                width: HomePage._prototypeWidth,
-                height: HomePage._prototypeSafeHeight,
-                child: child,
+        return MediaQuery.withNoTextScaling(
+          child: Center(
+            child: SizedBox(
+              width: scaledWidth,
+              height: scaledHeight,
+              child: Transform.scale(
+                scale: scale,
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                  width: HomePage._prototypeWidth,
+                  height: HomePage._prototypeSafeHeight,
+                  child: child,
+                ),
               ),
             ),
           ),

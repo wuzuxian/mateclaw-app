@@ -307,6 +307,192 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'设置'**
   String get homeTabSettings;
+
+  /// No description provided for @chatKicker.
+  ///
+  /// In zh, this message translates to:
+  /// **'Chat'**
+  String get chatKicker;
+
+  /// No description provided for @chatTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'对话'**
+  String get chatTitle;
+
+  /// No description provided for @chatSearchHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索会话、Agent 或渠道'**
+  String get chatSearchHint;
+
+  /// No description provided for @chatNewConversation.
+  ///
+  /// In zh, this message translates to:
+  /// **'新建对话'**
+  String get chatNewConversation;
+
+  /// No description provided for @chatNewConversationSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'选择 Agent，开始一次新的任务'**
+  String get chatNewConversationSubtitle;
+
+  /// No description provided for @chatRecentConversations.
+  ///
+  /// In zh, this message translates to:
+  /// **'最近对话'**
+  String get chatRecentConversations;
+
+  /// No description provided for @chatRecentCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'24'**
+  String get chatRecentCount;
+
+  /// No description provided for @chatContractAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'合同审查 Agent'**
+  String get chatContractAgent;
+
+  /// No description provided for @chatContractTime.
+  ///
+  /// In zh, this message translates to:
+  /// **'09:32'**
+  String get chatContractTime;
+
+  /// No description provided for @chatContractPreview.
+  ///
+  /// In zh, this message translates to:
+  /// **'发现 3 个高风险点，建议先补充验收条件...'**
+  String get chatContractPreview;
+
+  /// No description provided for @chatContractStatus.
+  ///
+  /// In zh, this message translates to:
+  /// **'工具完成'**
+  String get chatContractStatus;
+
+  /// No description provided for @chatContractMessageCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'12 条消息'**
+  String get chatContractMessageCount;
+
+  /// No description provided for @chatDataAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'数据分析 Agent'**
+  String get chatDataAgent;
+
+  /// No description provided for @chatDataTime.
+  ///
+  /// In zh, this message translates to:
+  /// **'昨天'**
+  String get chatDataTime;
+
+  /// No description provided for @chatDataPreview.
+  ///
+  /// In zh, this message translates to:
+  /// **'已生成本周经营指标摘要和异常说明。'**
+  String get chatDataPreview;
+
+  /// No description provided for @chatDataMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'8 条消息 · MySQL 数据源'**
+  String get chatDataMeta;
+
+  /// No description provided for @chatSupportAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'客服助理 Agent'**
+  String get chatSupportAgent;
+
+  /// No description provided for @chatSupportTime.
+  ///
+  /// In zh, this message translates to:
+  /// **'周二'**
+  String get chatSupportTime;
+
+  /// No description provided for @chatSupportPreview.
+  ///
+  /// In zh, this message translates to:
+  /// **'客户希望确认退款进度，已同步工单状态。'**
+  String get chatSupportPreview;
+
+  /// No description provided for @chatSupportMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'微信渠道 · 5 条消息'**
+  String get chatSupportMeta;
+
+  /// No description provided for @chatDailyTask.
+  ///
+  /// In zh, this message translates to:
+  /// **'日报摘要任务'**
+  String get chatDailyTask;
+
+  /// No description provided for @chatDailyPreview.
+  ///
+  /// In zh, this message translates to:
+  /// **'Cron 触发 · 成功完成'**
+  String get chatDailyPreview;
+
+  /// No description provided for @chatDetailMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'ReAct · 在线 · GPT-4.1'**
+  String get chatDetailMeta;
+
+  /// No description provided for @chatDetailTimestamp.
+  ///
+  /// In zh, this message translates to:
+  /// **'今天 09:32'**
+  String get chatDetailTimestamp;
+
+  /// No description provided for @chatUserMessage.
+  ///
+  /// In zh, this message translates to:
+  /// **'帮我检查这份采购合同，重点看付款条款和违约责任。'**
+  String get chatUserMessage;
+
+  /// No description provided for @chatBotMessage.
+  ///
+  /// In zh, this message translates to:
+  /// **'已完成初审。发现 3 个高风险点，建议先补充验收条件，再调整逾期付款宽限期。'**
+  String get chatBotMessage;
+
+  /// No description provided for @chatRiskPayment.
+  ///
+  /// In zh, this message translates to:
+  /// **'高风险 · 付款节点不明确'**
+  String get chatRiskPayment;
+
+  /// No description provided for @chatRiskLiability.
+  ///
+  /// In zh, this message translates to:
+  /// **'中风险 · 违约金上限缺失'**
+  String get chatRiskLiability;
+
+  /// No description provided for @chatToolComplete.
+  ///
+  /// In zh, this message translates to:
+  /// **'工具调用完成'**
+  String get chatToolComplete;
+
+  /// No description provided for @chatToolMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'合同解析器 · 法务知识库 · 1.8s'**
+  String get chatToolMeta;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'输入消息或上传文件'**
+  String get chatInputHint;
 }
 
 class _AppLocalizationsDelegate
