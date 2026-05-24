@@ -21,53 +21,28 @@ class ApiClient {
   final String? Function()? _authorizationTokenProvider;
   final HttpClient _httpClient;
 
-  Future<ApiResponse> postJson(
+  Future<ApiResponse> getJson(
     String path, {
-    required Map<String, Object?> body,
+    Map<String, Object?> queryParameters = const {},
+    Map<String, String> headers = const {},
     bool requiresAuthorization = true,
   }) async {
     try {
       final request = await _httpClient
-          .postUrl(_resolve(path))
+          .getUrl(_resolve(path, queryParameters: queryParameters))
           .timeout(const Duration(seconds: 10));
 
-      request.headers.contentType = ContentType.json;
       request.headers.set(HttpHeaders.acceptHeader, ContentType.json.value);
-
-      if (requiresAuthorization) {
-        final token = _authorizationTokenProvider?.call();
-        if (token != null && token.isNotEmpty) {
-          request.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
-        }
-      }
-
-      request.write(jsonEncode(body));
+      _applyHeaders(
+        request,
+        headers: headers,
+        requiresAuthorization: requiresAuthorization,
+      );
 
       final response = await request.close().timeout(
         const Duration(seconds: 20),
       );
-      final responseBody = await utf8.decoder.bind(response).join();
-      final decodedBody = _decodeBody(responseBody);
-
-      if (decodedBody is! Map<String, Object?>) {
-        throw ApiException(
-          type: ApiExceptionType.invalidResponse,
-          statusCode: response.statusCode,
-        );
-      }
-
-      final apiResponse = ApiResponse.fromJson(decodedBody);
-      if (response.statusCode >= HttpStatus.badRequest ||
-          apiResponse.code != HttpStatus.ok) {
-        throw ApiException(
-          type: ApiExceptionType.server,
-          statusCode: response.statusCode,
-          apiCode: apiResponse.code,
-          message: apiResponse.message,
-        );
-      }
-
-      return apiResponse;
+      return _parseResponse(response);
     } on ApiException {
       rethrow;
     } on TimeoutException {
@@ -81,12 +56,105 @@ class ApiClient {
     }
   }
 
-  Uri _resolve(String path) {
+  Future<ApiResponse> postJson(
+    String path, {
+    required Map<String, Object?> body,
+    Map<String, String> headers = const {},
+    bool requiresAuthorization = true,
+  }) async {
+    try {
+      final request = await _httpClient
+          .postUrl(_resolve(path))
+          .timeout(const Duration(seconds: 10));
+
+      request.headers.contentType = ContentType.json;
+      request.headers.set(HttpHeaders.acceptHeader, ContentType.json.value);
+      _applyHeaders(
+        request,
+        headers: headers,
+        requiresAuthorization: requiresAuthorization,
+      );
+
+      request.write(jsonEncode(body));
+
+      final response = await request.close().timeout(
+        const Duration(seconds: 20),
+      );
+      return _parseResponse(response);
+    } on ApiException {
+      rethrow;
+    } on TimeoutException {
+      throw const ApiException(type: ApiExceptionType.network);
+    } on SocketException {
+      throw const ApiException(type: ApiExceptionType.network);
+    } on HttpException {
+      throw ApiException(type: ApiExceptionType.network);
+    } on HandshakeException {
+      throw const ApiException(type: ApiExceptionType.network);
+    }
+  }
+
+  Uri _resolve(String path, {Map<String, Object?> queryParameters = const {}}) {
     final normalizedPath = path.startsWith('/') ? path.substring(1) : path;
     final basePath = _baseUri.path.endsWith('/')
         ? _baseUri.path
         : '${_baseUri.path}/';
-    return _baseUri.replace(path: '$basePath$normalizedPath');
+    final normalizedQueryParameters = <String, String>{};
+    for (final entry in queryParameters.entries) {
+      final value = entry.value;
+      if (value != null) {
+        normalizedQueryParameters[entry.key] = value.toString();
+      }
+    }
+
+    return _baseUri.replace(
+      path: '$basePath$normalizedPath',
+      queryParameters: normalizedQueryParameters.isEmpty
+          ? null
+          : normalizedQueryParameters,
+    );
+  }
+
+  void _applyHeaders(
+    HttpClientRequest request, {
+    required Map<String, String> headers,
+    required bool requiresAuthorization,
+  }) {
+    if (requiresAuthorization) {
+      final token = _authorizationTokenProvider?.call();
+      if (token != null && token.isNotEmpty) {
+        request.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
+      }
+    }
+
+    for (final entry in headers.entries) {
+      request.headers.set(entry.key, entry.value);
+    }
+  }
+
+  Future<ApiResponse> _parseResponse(HttpClientResponse response) async {
+    final responseBody = await utf8.decoder.bind(response).join();
+    final decodedBody = _decodeBody(responseBody);
+
+    if (decodedBody is! Map<String, Object?>) {
+      throw ApiException(
+        type: ApiExceptionType.invalidResponse,
+        statusCode: response.statusCode,
+      );
+    }
+
+    final apiResponse = ApiResponse.fromJson(decodedBody);
+    if (response.statusCode >= HttpStatus.badRequest ||
+        apiResponse.code != HttpStatus.ok) {
+      throw ApiException(
+        type: ApiExceptionType.server,
+        statusCode: response.statusCode,
+        apiCode: apiResponse.code,
+        message: apiResponse.message,
+      );
+    }
+
+    return apiResponse;
   }
 
   Object? _decodeBody(String responseBody) {

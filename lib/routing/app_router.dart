@@ -15,6 +15,8 @@ import '../features/home/view/model_provider_models_page.dart';
 import '../features/home/view/model_providers_page.dart';
 import '../features/home/view/knowledge_page.dart';
 import '../features/home/view/settings_page.dart';
+import '../features/home/data/home_repository.dart';
+import '../features/home/viewmodel/home_view_model.dart';
 import 'app_routes.dart';
 
 GoRouter createAppRouter(AuthSession authSession) {
@@ -53,7 +55,13 @@ GoRouter createAppRouter(AuthSession authSession) {
       ),
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) {
+          return ChangeNotifierProvider(
+            create: (context) =>
+                HomeViewModel(repository: context.read<HomeRepository>()),
+            child: const HomePage(),
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.chat,

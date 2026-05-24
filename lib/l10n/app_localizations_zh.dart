@@ -102,6 +102,36 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeApproval => '审批';
 
   @override
+  String get homePeriodTitle => '周期对比';
+
+  @override
+  String get homePeriodSubtitle => '从日、周、月三个维度观察系统运行状况。';
+
+  @override
+  String get homePeriodToday => '今日';
+
+  @override
+  String get homePeriodWeek => '本周';
+
+  @override
+  String get homePeriodMonth => '本月';
+
+  @override
+  String get homePeriodConversations => '对话数';
+
+  @override
+  String get homePeriodMessages => '消息数';
+
+  @override
+  String get homePeriodTokens => 'Token';
+
+  @override
+  String get homePeriodTools => '工具';
+
+  @override
+  String get homePeriodZeroValue => '0';
+
+  @override
   String get homeRecentRuns => '最近运行';
 
   @override
@@ -124,6 +154,33 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeModelReady => 'Ready';
+
+  @override
+  String get homeModelUnavailable => '未配置模型';
+
+  @override
+  String get homeNoRecentRuns => '暂无运行记录';
+
+  @override
+  String get homeRetry => '重试';
+
+  @override
+  String get homeLoadErrorNetwork => '网络异常，正在展示缓存数据';
+
+  @override
+  String get homeLoadErrorUnauthorized => '登录已失效，请重新登录';
+
+  @override
+  String get homeLoadErrorForbidden => '无权访问当前工作空间';
+
+  @override
+  String get homeLoadErrorServer => '首页数据加载失败';
+
+  @override
+  String get homeLoadErrorInvalidResponse => '首页数据格式异常';
+
+  @override
+  String get homeLoadErrorUnknown => '首页数据加载失败';
 
   @override
   String get homeTabOverview => '总览';

@@ -284,6 +284,66 @@ abstract class AppLocalizations {
   /// **'审批'**
   String get homeApproval;
 
+  /// No description provided for @homePeriodTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'周期对比'**
+  String get homePeriodTitle;
+
+  /// No description provided for @homePeriodSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'从日、周、月三个维度观察系统运行状况。'**
+  String get homePeriodSubtitle;
+
+  /// No description provided for @homePeriodToday.
+  ///
+  /// In zh, this message translates to:
+  /// **'今日'**
+  String get homePeriodToday;
+
+  /// No description provided for @homePeriodWeek.
+  ///
+  /// In zh, this message translates to:
+  /// **'本周'**
+  String get homePeriodWeek;
+
+  /// No description provided for @homePeriodMonth.
+  ///
+  /// In zh, this message translates to:
+  /// **'本月'**
+  String get homePeriodMonth;
+
+  /// No description provided for @homePeriodConversations.
+  ///
+  /// In zh, this message translates to:
+  /// **'对话数'**
+  String get homePeriodConversations;
+
+  /// No description provided for @homePeriodMessages.
+  ///
+  /// In zh, this message translates to:
+  /// **'消息数'**
+  String get homePeriodMessages;
+
+  /// No description provided for @homePeriodTokens.
+  ///
+  /// In zh, this message translates to:
+  /// **'Token'**
+  String get homePeriodTokens;
+
+  /// No description provided for @homePeriodTools.
+  ///
+  /// In zh, this message translates to:
+  /// **'工具'**
+  String get homePeriodTools;
+
+  /// No description provided for @homePeriodZeroValue.
+  ///
+  /// In zh, this message translates to:
+  /// **'0'**
+  String get homePeriodZeroValue;
+
   /// No description provided for @homeRecentRuns.
   ///
   /// In zh, this message translates to:
@@ -331,6 +391,60 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'Ready'**
   String get homeModelReady;
+
+  /// No description provided for @homeModelUnavailable.
+  ///
+  /// In zh, this message translates to:
+  /// **'未配置模型'**
+  String get homeModelUnavailable;
+
+  /// No description provided for @homeNoRecentRuns.
+  ///
+  /// In zh, this message translates to:
+  /// **'暂无运行记录'**
+  String get homeNoRecentRuns;
+
+  /// No description provided for @homeRetry.
+  ///
+  /// In zh, this message translates to:
+  /// **'重试'**
+  String get homeRetry;
+
+  /// No description provided for @homeLoadErrorNetwork.
+  ///
+  /// In zh, this message translates to:
+  /// **'网络异常，正在展示缓存数据'**
+  String get homeLoadErrorNetwork;
+
+  /// No description provided for @homeLoadErrorUnauthorized.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录已失效，请重新登录'**
+  String get homeLoadErrorUnauthorized;
+
+  /// No description provided for @homeLoadErrorForbidden.
+  ///
+  /// In zh, this message translates to:
+  /// **'无权访问当前工作空间'**
+  String get homeLoadErrorForbidden;
+
+  /// No description provided for @homeLoadErrorServer.
+  ///
+  /// In zh, this message translates to:
+  /// **'首页数据加载失败'**
+  String get homeLoadErrorServer;
+
+  /// No description provided for @homeLoadErrorInvalidResponse.
+  ///
+  /// In zh, this message translates to:
+  /// **'首页数据格式异常'**
+  String get homeLoadErrorInvalidResponse;
+
+  /// No description provided for @homeLoadErrorUnknown.
+  ///
+  /// In zh, this message translates to:
+  /// **'首页数据加载失败'**
+  String get homeLoadErrorUnknown;
 
   /// No description provided for @homeTabOverview.
   ///

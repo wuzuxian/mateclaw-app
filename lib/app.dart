@@ -6,6 +6,8 @@ import 'core/network/api_client.dart';
 import 'features/auth/data/auth_repository.dart';
 import 'features/auth/data/auth_session_store.dart';
 import 'features/auth/viewmodel/auth_session.dart';
+import 'features/home/data/home_cache_store.dart';
+import 'features/home/data/home_repository.dart';
 import 'l10n/app_localizations.dart';
 import 'routing/app_router.dart';
 
@@ -25,6 +27,11 @@ class _MateclawAppState extends State<MateclawApp> {
   );
   late final AuthRepository _authRepository = AuthRepository(
     apiClient: _apiClient,
+  );
+  late final HomeRepository _homeRepository = HomeRepository(
+    apiClient: _apiClient,
+    cacheStore: const HomeCacheStore(),
+    userIdProvider: () => _authSession.user?.id,
   );
   late final _router = createAppRouter(_authSession);
   late final Future<void> _restoreSession;
@@ -63,6 +70,7 @@ class _MateclawAppState extends State<MateclawApp> {
           providers: [
             Provider<ApiClient>.value(value: _apiClient),
             Provider<AuthRepository>.value(value: _authRepository),
+            Provider<HomeRepository>.value(value: _homeRepository),
             ChangeNotifierProvider<AuthSession>.value(value: _authSession),
           ],
           child: MaterialApp.router(

@@ -1,6 +1,6 @@
-import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart';
 
+import '../../../core/storage/app_database.dart';
 import 'auth_models.dart';
 
 abstract class AuthSessionStore {
@@ -14,10 +14,6 @@ abstract class AuthSessionStore {
 }
 
 class SqfliteAuthSessionStore implements AuthSessionStore {
-  Database? _database;
-
-  static const _databaseName = 'mateclaw.db';
-  static const _databaseVersion = 1;
   static const _sessionTable = 'auth_session';
   static const _sessionId = 1;
 
@@ -74,35 +70,10 @@ class SqfliteAuthSessionStore implements AuthSessionStore {
 
   @override
   Future<void> close() async {
-    await _database?.close();
-    _database = null;
+    await AppDatabase.close();
   }
 
   Future<Database> _openDatabase() async {
-    final existingDatabase = _database;
-    if (existingDatabase != null) {
-      return existingDatabase;
-    }
-
-    final databasePath = await getDatabasesPath();
-    final database = await openDatabase(
-      path.join(databasePath, _databaseName),
-      version: _databaseVersion,
-      onCreate: (database, version) async {
-        await database.execute('''
-CREATE TABLE $_sessionTable (
-  id INTEGER PRIMARY KEY,
-  token TEXT NOT NULL,
-  user_id INTEGER NOT NULL,
-  username TEXT NOT NULL,
-  nickname TEXT NOT NULL,
-  role TEXT NOT NULL,
-  updated_at INTEGER NOT NULL
-)
-''');
-      },
-    );
-    _database = database;
-    return database;
+    return AppDatabase.open();
   }
 }

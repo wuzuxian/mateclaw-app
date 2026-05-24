@@ -103,6 +103,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeApproval => 'Approvals';
 
   @override
+  String get homePeriodTitle => 'Period comparison';
+
+  @override
+  String get homePeriodSubtitle =>
+      'Track system activity across day, week, and month.';
+
+  @override
+  String get homePeriodToday => 'Today';
+
+  @override
+  String get homePeriodWeek => 'This week';
+
+  @override
+  String get homePeriodMonth => 'This month';
+
+  @override
+  String get homePeriodConversations => 'Chats';
+
+  @override
+  String get homePeriodMessages => 'Messages';
+
+  @override
+  String get homePeriodTokens => 'Token';
+
+  @override
+  String get homePeriodTools => 'Tools';
+
+  @override
+  String get homePeriodZeroValue => '0';
+
+  @override
   String get homeRecentRuns => 'Recent runs';
 
   @override
@@ -125,6 +156,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeModelReady => 'Ready';
+
+  @override
+  String get homeModelUnavailable => 'No model configured';
+
+  @override
+  String get homeNoRecentRuns => 'No recent runs';
+
+  @override
+  String get homeRetry => 'Retry';
+
+  @override
+  String get homeLoadErrorNetwork => 'Network error. Showing cached data.';
+
+  @override
+  String get homeLoadErrorUnauthorized => 'Session expired. Sign in again.';
+
+  @override
+  String get homeLoadErrorForbidden => 'No access to this workspace.';
+
+  @override
+  String get homeLoadErrorServer => 'Failed to load home data.';
+
+  @override
+  String get homeLoadErrorInvalidResponse => 'Unexpected home data format.';
+
+  @override
+  String get homeLoadErrorUnknown => 'Failed to load home data.';
 
   @override
   String get homeTabOverview => 'Overview';
