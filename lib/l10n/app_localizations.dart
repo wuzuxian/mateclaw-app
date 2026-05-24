@@ -169,6 +169,144 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'切换协议勾选状态'**
   String get loginToggleAgreement;
+
+  /// No description provided for @homeBrand.
+  ///
+  /// In zh, this message translates to:
+  /// **'MateClaw'**
+  String get homeBrand;
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'工作台'**
+  String get homeTitle;
+
+  /// No description provided for @homeAvatarInitial.
+  ///
+  /// In zh, this message translates to:
+  /// **'吴'**
+  String get homeAvatarInitial;
+
+  /// No description provided for @homeTodayConversations.
+  ///
+  /// In zh, this message translates to:
+  /// **'今日会话'**
+  String get homeTodayConversations;
+
+  /// No description provided for @homeHealth.
+  ///
+  /// In zh, this message translates to:
+  /// **'健康'**
+  String get homeHealth;
+
+  /// No description provided for @homeTodayCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'128'**
+  String get homeTodayCount;
+
+  /// No description provided for @homeTodayMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'1,842 条消息 · 43 次工具调用'**
+  String get homeTodayMeta;
+
+  /// No description provided for @homeNewChat.
+  ///
+  /// In zh, this message translates to:
+  /// **'新对话'**
+  String get homeNewChat;
+
+  /// No description provided for @homeAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'Agent'**
+  String get homeAgent;
+
+  /// No description provided for @homeApproval.
+  ///
+  /// In zh, this message translates to:
+  /// **'审批'**
+  String get homeApproval;
+
+  /// No description provided for @homeRecentRuns.
+  ///
+  /// In zh, this message translates to:
+  /// **'最近运行'**
+  String get homeRecentRuns;
+
+  /// No description provided for @homeDailySummaryTask.
+  ///
+  /// In zh, this message translates to:
+  /// **'日报摘要任务'**
+  String get homeDailySummaryTask;
+
+  /// No description provided for @homeDailySummaryMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'成功 · 2分钟前 · 12.4k tokens'**
+  String get homeDailySummaryMeta;
+
+  /// No description provided for @homeContractAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'合同审查 Agent'**
+  String get homeContractAgent;
+
+  /// No description provided for @homeContractAgentMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行中 · 飞书渠道 · 3 步骤'**
+  String get homeContractAgentMeta;
+
+  /// No description provided for @homeCurrentModel.
+  ///
+  /// In zh, this message translates to:
+  /// **'当前模型'**
+  String get homeCurrentModel;
+
+  /// No description provided for @homeModelName.
+  ///
+  /// In zh, this message translates to:
+  /// **'OpenAI · GPT-4.1'**
+  String get homeModelName;
+
+  /// No description provided for @homeModelReady.
+  ///
+  /// In zh, this message translates to:
+  /// **'Ready'**
+  String get homeModelReady;
+
+  /// No description provided for @homeTabOverview.
+  ///
+  /// In zh, this message translates to:
+  /// **'总览'**
+  String get homeTabOverview;
+
+  /// No description provided for @homeTabChat.
+  ///
+  /// In zh, this message translates to:
+  /// **'对话'**
+  String get homeTabChat;
+
+  /// No description provided for @homeTabAgent.
+  ///
+  /// In zh, this message translates to:
+  /// **'Agent'**
+  String get homeTabAgent;
+
+  /// No description provided for @homeTabKnowledge.
+  ///
+  /// In zh, this message translates to:
+  /// **'知识'**
+  String get homeTabKnowledge;
+
+  /// No description provided for @homeTabSettings.
+  ///
+  /// In zh, this message translates to:
+  /// **'设置'**
+  String get homeTabSettings;
 }
 
 class _AppLocalizationsDelegate
