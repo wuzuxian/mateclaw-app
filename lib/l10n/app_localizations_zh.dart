@@ -39,6 +39,33 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginButton => '登录';
 
   @override
+  String get loginButtonLoading => '登录中...';
+
+  @override
+  String get loginUsernameRequired => '请输入用户名';
+
+  @override
+  String get loginPasswordRequired => '请输入密码';
+
+  @override
+  String get loginInvalidCredentials => '用户名或密码错误';
+
+  @override
+  String get loginRateLimited => '尝试次数过多，请稍后再试';
+
+  @override
+  String get loginNetworkError => '无法连接服务器，请检查网络或后端服务';
+
+  @override
+  String get loginServerError => '登录失败，请稍后再试';
+
+  @override
+  String get loginInvalidResponse => '服务器返回数据异常';
+
+  @override
+  String get loginUnknownError => '登录失败，请重试';
+
+  @override
   String get loginTogglePasswordVisibility => '切换密码可见性';
 
   @override
@@ -474,8 +501,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get modelProviderConnectionFailed => '连接失败';
 
   @override
-  String modelProviderHealthyCount(int count) => '$count 正常';
+  String modelProviderHealthyCount(Object count) {
+    return '$count 正常';
+  }
 
   @override
-  String modelProviderEnabledCount(int count) => '$count 已启用';
+  String modelProviderEnabledCount(Object count) {
+    return '$count 已启用';
+  }
 }

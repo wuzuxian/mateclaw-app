@@ -158,6 +158,60 @@ abstract class AppLocalizations {
   /// **'登录'**
   String get loginButton;
 
+  /// No description provided for @loginButtonLoading.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录中...'**
+  String get loginButtonLoading;
+
+  /// No description provided for @loginUsernameRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入用户名'**
+  String get loginUsernameRequired;
+
+  /// No description provided for @loginPasswordRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入密码'**
+  String get loginPasswordRequired;
+
+  /// No description provided for @loginInvalidCredentials.
+  ///
+  /// In zh, this message translates to:
+  /// **'用户名或密码错误'**
+  String get loginInvalidCredentials;
+
+  /// No description provided for @loginRateLimited.
+  ///
+  /// In zh, this message translates to:
+  /// **'尝试次数过多，请稍后再试'**
+  String get loginRateLimited;
+
+  /// No description provided for @loginNetworkError.
+  ///
+  /// In zh, this message translates to:
+  /// **'无法连接服务器，请检查网络或后端服务'**
+  String get loginNetworkError;
+
+  /// No description provided for @loginServerError.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录失败，请稍后再试'**
+  String get loginServerError;
+
+  /// No description provided for @loginInvalidResponse.
+  ///
+  /// In zh, this message translates to:
+  /// **'服务器返回数据异常'**
+  String get loginInvalidResponse;
+
+  /// No description provided for @loginUnknownError.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录失败，请重试'**
+  String get loginUnknownError;
+
   /// No description provided for @loginTogglePasswordVisibility.
   ///
   /// In zh, this message translates to:
@@ -1032,13 +1086,13 @@ abstract class AppLocalizations {
   ///
   /// In zh, this message translates to:
   /// **'{count} 正常'**
-  String modelProviderHealthyCount(int count);
+  String modelProviderHealthyCount(Object count);
 
   /// No description provided for @modelProviderEnabledCount.
   ///
   /// In zh, this message translates to:
   /// **'{count} 已启用'**
-  String modelProviderEnabledCount(int count);
+  String modelProviderEnabledCount(Object count);
 }
 
 class _AppLocalizationsDelegate

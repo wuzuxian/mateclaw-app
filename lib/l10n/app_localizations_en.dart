@@ -39,6 +39,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginButton => 'Log in';
 
   @override
+  String get loginButtonLoading => 'Logging in...';
+
+  @override
+  String get loginUsernameRequired => 'Enter username';
+
+  @override
+  String get loginPasswordRequired => 'Enter password';
+
+  @override
+  String get loginInvalidCredentials => 'Incorrect username or password';
+
+  @override
+  String get loginRateLimited => 'Too many attempts. Try again later.';
+
+  @override
+  String get loginNetworkError =>
+      'Cannot reach the server. Check the network or backend service.';
+
+  @override
+  String get loginServerError => 'Login failed. Try again later.';
+
+  @override
+  String get loginInvalidResponse => 'Unexpected server response.';
+
+  @override
+  String get loginUnknownError => 'Login failed. Try again.';
+
+  @override
   String get loginTogglePasswordVisibility => 'Toggle password visibility';
 
   @override
@@ -491,8 +519,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get modelProviderConnectionFailed => 'Connection failed';
 
   @override
-  String modelProviderHealthyCount(int count) => '$count Healthy';
+  String modelProviderHealthyCount(Object count) {
+    return '$count Healthy';
+  }
 
   @override
-  String modelProviderEnabledCount(int count) => '$count Enabled';
+  String modelProviderEnabledCount(Object count) {
+    return '$count Enabled';
+  }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../routing/app_routes.dart';
+import '../viewmodel/login_view_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,6 +28,19 @@ class _LoginPageState extends State<LoginPage> {
   bool _isPasswordObscured = true;
   bool _hasAgreed = true;
 
+  Future<void> _login(LoginViewModel viewModel) async {
+    FocusScope.of(context).unfocus();
+    final didLogin = await viewModel.login(
+      username: _usernameController.text,
+      password: _passwordController.text,
+    );
+    if (!mounted || !didLogin) {
+      return;
+    }
+
+    context.go(AppRoutes.home);
+  }
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -36,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final viewModel = context.watch<LoginViewModel>();
 
     return Scaffold(
       backgroundColor: _background,
@@ -56,6 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                     passwordController: _passwordController,
                     isPasswordObscured: _isPasswordObscured,
                     hasAgreed: _hasAgreed,
+                    isLoading: viewModel.isLoading,
+                    error: viewModel.error,
                     onTogglePassword: () {
                       setState(() {
                         _isPasswordObscured = !_isPasswordObscured;
@@ -66,7 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                         _hasAgreed = !_hasAgreed;
                       });
                     },
-                    onLogin: () => context.go(AppRoutes.home),
+                    onLogin: () => _login(viewModel),
+                    onInputChanged: viewModel.clearError,
                   ),
                 ],
               ),
@@ -165,9 +184,12 @@ class _LoginForm extends StatelessWidget {
     required this.passwordController,
     required this.isPasswordObscured,
     required this.hasAgreed,
+    required this.isLoading,
+    required this.error,
     required this.onTogglePassword,
     required this.onToggleAgreement,
     required this.onLogin,
+    required this.onInputChanged,
   });
 
   final AppLocalizations l10n;
@@ -175,9 +197,12 @@ class _LoginForm extends StatelessWidget {
   final TextEditingController passwordController;
   final bool isPasswordObscured;
   final bool hasAgreed;
+  final bool isLoading;
+  final LoginError? error;
   final VoidCallback onTogglePassword;
   final VoidCallback onToggleAgreement;
   final VoidCallback onLogin;
+  final VoidCallback onInputChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +214,8 @@ class _LoginForm extends StatelessWidget {
           hintText: l10n.loginUsernameHint,
           icon: Icons.person_outline,
           textInputAction: TextInputAction.next,
+          enabled: !isLoading,
+          onChanged: (_) => onInputChanged(),
         ),
         const SizedBox(height: 16),
         _LoginTextField(
@@ -197,11 +224,18 @@ class _LoginForm extends StatelessWidget {
           icon: Icons.lock_outline,
           obscureText: isPasswordObscured,
           textInputAction: TextInputAction.done,
+          enabled: !isLoading,
+          onChanged: (_) => onInputChanged(),
+          onSubmitted: (_) {
+            if (hasAgreed && !isLoading) {
+              onLogin();
+            }
+          },
           suffix: SizedBox(
             width: 30,
             height: 30,
             child: IconButton(
-              onPressed: onTogglePassword,
+              onPressed: isLoading ? null : onTogglePassword,
               padding: EdgeInsets.zero,
               tooltip: l10n.loginTogglePasswordVisibility,
               style: IconButton.styleFrom(
@@ -224,14 +258,18 @@ class _LoginForm extends StatelessWidget {
         _AgreementRow(
           l10n: l10n,
           hasAgreed: hasAgreed,
-          onToggleAgreement: onToggleAgreement,
+          onToggleAgreement: isLoading ? null : onToggleAgreement,
         ),
+        if (error != null) ...[
+          const SizedBox(height: 12),
+          _LoginErrorMessage(message: _messageForError(l10n, error!)),
+        ],
         const SizedBox(height: 16),
         SizedBox(
           width: double.infinity,
           height: 52,
           child: FilledButton(
-            onPressed: hasAgreed ? onLogin : null,
+            onPressed: hasAgreed && !isLoading ? onLogin : null,
             style: FilledButton.styleFrom(
               backgroundColor: _LoginPageState._accent,
               disabledBackgroundColor: _LoginPageState._border,
@@ -247,11 +285,26 @@ class _LoginForm extends StatelessWidget {
               elevation: 0,
               shadowColor: Colors.transparent,
             ),
-            child: Text(l10n.loginButton),
+            child: isLoading
+                ? _LoginLoadingLabel(l10n: l10n)
+                : Text(l10n.loginButton),
           ),
         ),
       ],
     );
+  }
+
+  String _messageForError(AppLocalizations l10n, LoginError error) {
+    return switch (error) {
+      LoginError.emptyUsername => l10n.loginUsernameRequired,
+      LoginError.emptyPassword => l10n.loginPasswordRequired,
+      LoginError.invalidCredentials => l10n.loginInvalidCredentials,
+      LoginError.rateLimited => l10n.loginRateLimited,
+      LoginError.network => l10n.loginNetworkError,
+      LoginError.server => l10n.loginServerError,
+      LoginError.invalidResponse => l10n.loginInvalidResponse,
+      LoginError.unknown => l10n.loginUnknownError,
+    };
   }
 }
 
@@ -261,16 +314,22 @@ class _LoginTextField extends StatelessWidget {
     required this.hintText,
     required this.icon,
     required this.textInputAction,
+    required this.enabled,
     this.obscureText = false,
     this.suffix,
+    this.onChanged,
+    this.onSubmitted,
   });
 
   final TextEditingController controller;
   final String hintText;
   final IconData icon;
   final TextInputAction textInputAction;
+  final bool enabled;
   final bool obscureText;
   final Widget? suffix;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -278,8 +337,11 @@ class _LoginTextField extends StatelessWidget {
       height: 54,
       child: TextField(
         controller: controller,
+        enabled: enabled,
         obscureText: obscureText,
         textInputAction: textInputAction,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
         cursorColor: _LoginPageState._accent,
         style: const TextStyle(
           color: _LoginPageState._text,
@@ -336,7 +398,7 @@ class _AgreementRow extends StatelessWidget {
 
   final AppLocalizations l10n;
   final bool hasAgreed;
-  final VoidCallback onToggleAgreement;
+  final VoidCallback? onToggleAgreement;
 
   @override
   Widget build(BuildContext context) {
@@ -410,6 +472,60 @@ class _AgreementRow extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _LoginErrorMessage extends StatelessWidget {
+  const _LoginErrorMessage({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF1F2),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFCDD2)),
+      ),
+      child: Text(
+        message,
+        style: const TextStyle(
+          color: Color(0xFFB42318),
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          height: 1.42,
+        ),
+      ),
+    );
+  }
+}
+
+class _LoginLoadingLabel extends StatelessWidget {
+  const _LoginLoadingLabel({required this.l10n});
+
+  final AppLocalizations l10n;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(
+          width: 18,
+          height: 18,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: _LoginPageState._surface,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(l10n.loginButtonLoading),
+      ],
     );
   }
 }
