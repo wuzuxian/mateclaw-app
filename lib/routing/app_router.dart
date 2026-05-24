@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../features/auth/data/auth_repository.dart';
 import '../features/auth/view/login_page.dart';
+import '../features/auth/view/register_page.dart';
 import '../features/auth/viewmodel/auth_session.dart';
 import '../features/auth/viewmodel/login_view_model.dart';
+import '../features/auth/viewmodel/register_view_model.dart';
 import '../features/chat/view/chat_detail_page.dart';
 import '../features/chat/view/chat_list_page.dart';
 import '../features/home/view/agent_page.dart';
@@ -29,13 +31,15 @@ GoRouter createAppRouter(AuthSession authSession) {
         return null;
       }
 
-      final isLoggingIn = state.matchedLocation == AppRoutes.login;
+      final isAuthRoute =
+          state.matchedLocation == AppRoutes.login ||
+          state.matchedLocation == AppRoutes.register;
       final isAuthenticated = authSession.isAuthenticated;
 
-      if (!isAuthenticated && !isLoggingIn) {
+      if (!isAuthenticated && !isAuthRoute) {
         return AppRoutes.login;
       }
-      if (isAuthenticated && isLoggingIn) {
+      if (isAuthenticated && isAuthRoute) {
         return AppRoutes.home;
       }
 
@@ -51,6 +55,18 @@ GoRouter createAppRouter(AuthSession authSession) {
               authSession: context.read<AuthSession>(),
             ),
             child: const LoginPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        builder: (context, state) {
+          return ChangeNotifierProvider(
+            create: (context) => RegisterViewModel(
+              authRepository: context.read<AuthRepository>(),
+              authSession: context.read<AuthSession>(),
+            ),
+            child: const RegisterPage(),
           );
         },
       ),

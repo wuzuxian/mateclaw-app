@@ -224,6 +224,102 @@ abstract class AppLocalizations {
   /// **'切换协议勾选状态'**
   String get loginToggleAgreement;
 
+  /// No description provided for @loginNoAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'还没有账号？'**
+  String get loginNoAccount;
+
+  /// No description provided for @loginGoRegister.
+  ///
+  /// In zh, this message translates to:
+  /// **'去注册'**
+  String get loginGoRegister;
+
+  /// No description provided for @registerSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'创建你的 AI 工作台'**
+  String get registerSubtitle;
+
+  /// No description provided for @registerUsernameHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'用户名（必填，需唯一）'**
+  String get registerUsernameHint;
+
+  /// No description provided for @registerNicknameHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'昵称（可选，默认使用用户名）'**
+  String get registerNicknameHint;
+
+  /// No description provided for @registerPasswordHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'密码（必填）'**
+  String get registerPasswordHint;
+
+  /// No description provided for @registerWorkspaceHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'工作空间名称（可选）'**
+  String get registerWorkspaceHint;
+
+  /// No description provided for @registerWorkspaceHintText.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册后自动创建唯一工作空间'**
+  String get registerWorkspaceHintText;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In zh, this message translates to:
+  /// **'创建账号'**
+  String get registerButton;
+
+  /// No description provided for @registerButtonLoading.
+  ///
+  /// In zh, this message translates to:
+  /// **'创建中...'**
+  String get registerButtonLoading;
+
+  /// No description provided for @registerHasAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'已有账号？'**
+  String get registerHasAccount;
+
+  /// No description provided for @registerGoLogin.
+  ///
+  /// In zh, this message translates to:
+  /// **'去登录'**
+  String get registerGoLogin;
+
+  /// No description provided for @registerUsernameTaken.
+  ///
+  /// In zh, this message translates to:
+  /// **'用户名已存在，请换一个'**
+  String get registerUsernameTaken;
+
+  /// No description provided for @registerInvalidInput.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册信息有误，请检查后重试'**
+  String get registerInvalidInput;
+
+  /// No description provided for @registerServerError.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册失败，请稍后再试'**
+  String get registerServerError;
+
+  /// No description provided for @registerUnknownError.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册失败，请重试'**
+  String get registerUnknownError;
+
   /// No description provided for @homeBrand.
   ///
   /// In zh, this message translates to:

@@ -73,6 +73,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginToggleAgreement => 'Toggle agreement consent';
 
   @override
+  String get loginNoAccount => 'No account yet?';
+
+  @override
+  String get loginGoRegister => 'Register';
+
+  @override
+  String get registerSubtitle => 'Create your AI workspace';
+
+  @override
+  String get registerUsernameHint => 'Username (required, unique)';
+
+  @override
+  String get registerNicknameHint =>
+      'Nickname (optional, defaults to username)';
+
+  @override
+  String get registerPasswordHint => 'Password (required)';
+
+  @override
+  String get registerWorkspaceHint => 'Workspace name (optional)';
+
+  @override
+  String get registerWorkspaceHintText =>
+      'A unique workspace is created after registration';
+
+  @override
+  String get registerButton => 'Create account';
+
+  @override
+  String get registerButtonLoading => 'Creating...';
+
+  @override
+  String get registerHasAccount => 'Already have an account?';
+
+  @override
+  String get registerGoLogin => 'Log in';
+
+  @override
+  String get registerUsernameTaken =>
+      'Username already exists. Choose another one.';
+
+  @override
+  String get registerInvalidInput =>
+      'Check the registration details and try again.';
+
+  @override
+  String get registerServerError => 'Registration failed. Try again later.';
+
+  @override
+  String get registerUnknownError => 'Registration failed. Try again.';
+
+  @override
   String get homeBrand => 'MateClaw';
 
   @override

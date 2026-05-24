@@ -72,6 +72,54 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginToggleAgreement => '切换协议勾选状态';
 
   @override
+  String get loginNoAccount => '还没有账号？';
+
+  @override
+  String get loginGoRegister => '去注册';
+
+  @override
+  String get registerSubtitle => '创建你的 AI 工作台';
+
+  @override
+  String get registerUsernameHint => '用户名（必填，需唯一）';
+
+  @override
+  String get registerNicknameHint => '昵称（可选，默认使用用户名）';
+
+  @override
+  String get registerPasswordHint => '密码（必填）';
+
+  @override
+  String get registerWorkspaceHint => '工作空间名称（可选）';
+
+  @override
+  String get registerWorkspaceHintText => '注册后自动创建唯一工作空间';
+
+  @override
+  String get registerButton => '创建账号';
+
+  @override
+  String get registerButtonLoading => '创建中...';
+
+  @override
+  String get registerHasAccount => '已有账号？';
+
+  @override
+  String get registerGoLogin => '去登录';
+
+  @override
+  String get registerUsernameTaken => '用户名已存在，请换一个';
+
+  @override
+  String get registerInvalidInput => '注册信息有误，请检查后重试';
+
+  @override
+  String get registerServerError => '注册失败，请稍后再试';
+
+  @override
+  String get registerUnknownError => '注册失败，请重试';
+
+  @override
   String get homeBrand => 'MateClaw';
 
   @override

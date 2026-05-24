@@ -43,6 +43,49 @@ class AuthRepository {
     return session;
   }
 
+  Future<AuthSessionState> register({
+    required String username,
+    required String password,
+    String? nickname,
+    String? workspaceName,
+  }) async {
+    final body = <String, Object?>{
+      'username': username,
+      'password': password,
+    };
+    if (nickname != null && nickname.isNotEmpty) {
+      body['nickname'] = nickname;
+    }
+    if (workspaceName != null && workspaceName.isNotEmpty) {
+      body['workspaceName'] = workspaceName;
+    }
+
+    debugLog('AuthRepository.register request', data: {'username': username});
+    final response = await _apiClient.postJson(
+      '/api/mobile/user/register',
+      body: body,
+      requiresAuthorization: false,
+    );
+
+    final data = _mapValue(response.data);
+    if (data == null) {
+      throw const ApiException(type: ApiExceptionType.invalidResponse);
+    }
+
+    final session = authSessionStateFromRegisterData(data);
+    debugLog(
+      'AuthRepository.register response',
+      data: {
+        'keys': data.keys.toList(),
+        'tokenLength': session.token.length,
+        'parsedUserId': session.user.id,
+        'parsedUsername': session.user.username,
+      },
+    );
+
+    return session;
+  }
+
   Future<void> logout() async {
     await _apiClient.postJson(
       '/api/mobile/user/logout',
@@ -58,6 +101,25 @@ AuthSessionState authSessionStateFromLoginData(Map<String, Object?> data) {
   }
 
   final userData = _mapValue(data['user']) ?? data;
+  final user = AuthUser.fromJson(userData);
+  if (user.id <= 0) {
+    throw const ApiException(type: ApiExceptionType.invalidResponse);
+  }
+
+  return AuthSessionState(token: token, user: user);
+}
+
+AuthSessionState authSessionStateFromRegisterData(Map<String, Object?> data) {
+  final token = data['token'] as String? ?? '';
+  if (token.isEmpty) {
+    throw const ApiException(type: ApiExceptionType.invalidResponse);
+  }
+
+  final userData = _mapValue(data['user']);
+  if (userData == null) {
+    throw const ApiException(type: ApiExceptionType.invalidResponse);
+  }
+
   final user = AuthUser.fromJson(userData);
   if (user.id <= 0) {
     throw const ApiException(type: ApiExceptionType.invalidResponse);
