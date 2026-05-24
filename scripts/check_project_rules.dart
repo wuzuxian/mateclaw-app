@@ -1,6 +1,8 @@
 import 'dart:io';
 
 void main(List<String> args) {
+  _printDevelopmentRulesNotice();
+
   final stagedOnly = args.contains('--staged');
   final files = stagedOnly ? _stagedFiles() : _allTrackedFiles();
 
@@ -18,6 +20,8 @@ void main(List<String> args) {
   if (!stagedOnly || files.contains('l10n.yaml')) {
     violations.addAll(_checkL10nYaml());
   }
+
+  violations.addAll(_checkProjectConventionDocs());
 
   for (final file in files.where((file) => file.endsWith('.dart'))) {
     if (!File(file).existsSync()) {
@@ -89,6 +93,13 @@ List<String> _splitFileList(String output) {
       .toList(growable: false);
 }
 
+void _printDevelopmentRulesNotice() {
+  stdout.writeln('Project rule: before development, read docs/1.项目开发规约.md.');
+  stdout.writeln(
+    'Layout rule: multi-screen UI must use floating/scaled layout based on design proportions.',
+  );
+}
+
 List<_Violation> _checkPubspec() {
   final file = File('pubspec.yaml');
   if (!file.existsSync()) {
@@ -147,6 +158,31 @@ List<_Violation> _checkL10nYaml() {
           1,
           'Missing `$key` required by gen_l10n conventions.',
         ),
+  ];
+}
+
+List<_Violation> _checkProjectConventionDocs() {
+  const path = 'docs/1.项目开发规约.md';
+  final file = File(path);
+  if (!file.existsSync()) {
+    return const [
+      _Violation(
+        path,
+        1,
+        'Project development conventions must exist and be read before development.',
+      ),
+    ];
+  }
+
+  final content = file.readAsStringSync();
+  final requiredRules = {
+    '每次开始开发前，开发者和 AI 助手都必须先阅读本文档': 'Missing pre-development reading rule.',
+    '多屏幕尺寸适配必须优先使用浮动布局': 'Missing multi-screen floating layout rule.',
+  };
+
+  return [
+    for (final rule in requiredRules.entries)
+      if (!content.contains(rule.key)) _Violation(path, 1, rule.value),
   ];
 }
 
