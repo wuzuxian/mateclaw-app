@@ -205,4 +205,184 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatInputHint => '输入消息或上传文件';
+
+  @override
+  String get agentKicker => 'Agent';
+
+  @override
+  String get agentTitle => '团队';
+
+  @override
+  String get agentSegmentMembers => '成员';
+
+  @override
+  String get agentSegmentLive => 'Live';
+
+  @override
+  String get agentContractName => '合同审查 Agent';
+
+  @override
+  String get agentContractDescription => '合同风险识别、条款建议、审批摘要';
+
+  @override
+  String get agentOnline => '在线';
+
+  @override
+  String get agentContractTools => '6 工具';
+
+  @override
+  String get agentDataName => '数据分析 Agent';
+
+  @override
+  String get agentDataDescription => '连接数据源并生成经营洞察';
+
+  @override
+  String get agentDataState => '空闲 · 3 工具 · MySQL';
+
+  @override
+  String get agentSupportName => '客服助理 Agent';
+
+  @override
+  String get agentSupportDescription => '渠道消息、FAQ、升级工单';
+
+  @override
+  String get agentSupportState => '运行中 · 微信渠道 · 18 会话';
+
+  @override
+  String get agentLiveTitle => 'Live 运行态';
+
+  @override
+  String get agentLiveAttention => '2 需关注';
+
+  @override
+  String get agentLiveRunningCount => '12';
+
+  @override
+  String get agentLiveRunningLabel => '运行中';
+
+  @override
+  String get agentLiveBlockedCount => '3';
+
+  @override
+  String get agentLiveBlockedLabel => '卡住';
+
+  @override
+  String get knowledgeKicker => 'Knowledge';
+
+  @override
+  String get knowledgeTitle => '知识与记忆';
+
+  @override
+  String get knowledgeSearchHint => '搜索知识库、记忆和文档';
+
+  @override
+  String get knowledgeBaseCount => '12';
+
+  @override
+  String get knowledgeBasesLabel => '知识库';
+
+  @override
+  String get knowledgeMemoryCount => '4.8k';
+
+  @override
+  String get knowledgeMemoryLabel => '记忆条目';
+
+  @override
+  String get knowledgeBasesTitle => '知识库';
+
+  @override
+  String get knowledgeLegalLibrary => '法务合同库';
+
+  @override
+  String get knowledgeLegalMeta => '326 文档 · 绑定 2 个 Agent';
+
+  @override
+  String get knowledgeProductFaq => '产品 FAQ';
+
+  @override
+  String get knowledgeProductMeta => '1,240 片段 · 昨天更新';
+
+  @override
+  String get knowledgeRecentMemory => '近期记忆';
+
+  @override
+  String get knowledgeMemoryPreference => '客户偏好：优先中文回复';
+
+  @override
+  String get knowledgeMemoryMeta => '客服助理 Agent · 自动沉淀';
+
+  @override
+  String get settingsTitle => '设置';
+
+  @override
+  String get settingsWorkspaceRole => '默认工作区 · 管理员';
+
+  @override
+  String get settingsHealthTitle => '系统健康';
+
+  @override
+  String get settingsHealthMeta => 'API、队列、模型服务均正常';
+
+  @override
+  String get settingsHealthBadge => 'Healthy';
+
+  @override
+  String get settingsCommonConfig => '常用配置';
+
+  @override
+  String get settingsModelProviders => '模型提供商';
+
+  @override
+  String get settingsModelProvidersMeta => '8/10 已配置';
+
+  @override
+  String get settingsMcpTools => 'MCP 与工具';
+
+  @override
+  String get settingsMcpToolsMeta => '24 工具';
+
+  @override
+  String get settingsChannelConnections => '渠道连接';
+
+  @override
+  String get settingsChannelConnectionsMeta => '飞书、微信';
+
+  @override
+  String get settingsSecurity => '安全';
+
+  @override
+  String get settingsPendingActions => '待审批动作';
+
+  @override
+  String get settingsPendingCount => '3';
+
+  @override
+  String get settingsApprovalDescription => '高风险工具、文件访问和命令统一审批。';
+
+  @override
+  String get settingsApprovalQueue => '查看审批队列';
+
+  @override
+  String get settingsWorkspaceSettings => '工作区设置';
+
+  @override
+  String get settingsDefaultWorkspace => '默认工作区';
+
+  @override
+  String get settingsWorkspaceMeta => '独立隔离 Agent、知识库、渠道与模型权限';
+
+  @override
+  String get settingsMembersChip => '6 成员';
+
+  @override
+  String get settingsRolesChip => '4 角色';
+
+  @override
+  String get settingsAgentsChip => '12 Agent';
+
+  @override
+  String get settingsConfigureWorkspace => '设置工作区';
+
+  @override
+  String get settingsSwitchWorkspace => '切换';
 }

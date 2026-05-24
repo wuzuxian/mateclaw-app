@@ -3,7 +3,10 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/view/login_page.dart';
 import '../features/chat/view/chat_detail_page.dart';
 import '../features/chat/view/chat_list_page.dart';
+import '../features/home/view/agent_page.dart';
 import '../features/home/view/home_page.dart';
+import '../features/home/view/knowledge_page.dart';
+import '../features/home/view/settings_page.dart';
 import 'app_routes.dart';
 
 final appRouter = GoRouter(

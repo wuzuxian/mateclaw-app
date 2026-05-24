@@ -178,6 +178,7 @@ List<_Violation> _checkProjectConventionDocs() {
   final requiredRules = {
     '每次开始开发前，开发者和 AI 助手都必须先阅读本文档': 'Missing pre-development reading rule.',
     '多屏幕尺寸适配必须优先使用浮动布局': 'Missing multi-screen floating layout rule.',
+    '单个页面和可复用组件必须单独一个文件': 'Missing single-responsibility file boundary rule.',
   };
 
   return [
@@ -239,6 +240,8 @@ List<_Violation> _checkDartFile(String path) {
   }
 
   if (_isViewFile(normalized)) {
+    violations.addAll(_checkSinglePageClass(path, content));
+
     _scanLines(
       path: path,
       lines: lines,
@@ -264,6 +267,27 @@ List<_Violation> _checkDartFile(String path) {
   );
 
   return violations;
+}
+
+List<_Violation> _checkSinglePageClass(String path, String content) {
+  final pageClassPattern = RegExp(
+    r'\bclass\s+([A-Z]\w*Page)\s+extends\s+(StatelessWidget|StatefulWidget)\b',
+  );
+  final pageClasses = [
+    for (final match in pageClassPattern.allMatches(content)) match.group(1)!,
+  ];
+
+  if (pageClasses.length <= 1) {
+    return const [];
+  }
+
+  return [
+    _Violation(
+      path,
+      1,
+      'Page files must define only one public Page class. Move ${pageClasses.skip(1).join(', ')} to separate page files.',
+    ),
+  ];
 }
 
 void _scanLines({

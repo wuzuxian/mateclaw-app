@@ -493,6 +493,366 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'输入消息或上传文件'**
   String get chatInputHint;
+
+  /// No description provided for @agentKicker.
+  ///
+  /// In zh, this message translates to:
+  /// **'Agent'**
+  String get agentKicker;
+
+  /// No description provided for @agentTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'团队'**
+  String get agentTitle;
+
+  /// No description provided for @agentSegmentMembers.
+  ///
+  /// In zh, this message translates to:
+  /// **'成员'**
+  String get agentSegmentMembers;
+
+  /// No description provided for @agentSegmentLive.
+  ///
+  /// In zh, this message translates to:
+  /// **'Live'**
+  String get agentSegmentLive;
+
+  /// No description provided for @agentContractName.
+  ///
+  /// In zh, this message translates to:
+  /// **'合同审查 Agent'**
+  String get agentContractName;
+
+  /// No description provided for @agentContractDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'合同风险识别、条款建议、审批摘要'**
+  String get agentContractDescription;
+
+  /// No description provided for @agentOnline.
+  ///
+  /// In zh, this message translates to:
+  /// **'在线'**
+  String get agentOnline;
+
+  /// No description provided for @agentContractTools.
+  ///
+  /// In zh, this message translates to:
+  /// **'6 工具'**
+  String get agentContractTools;
+
+  /// No description provided for @agentDataName.
+  ///
+  /// In zh, this message translates to:
+  /// **'数据分析 Agent'**
+  String get agentDataName;
+
+  /// No description provided for @agentDataDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'连接数据源并生成经营洞察'**
+  String get agentDataDescription;
+
+  /// No description provided for @agentDataState.
+  ///
+  /// In zh, this message translates to:
+  /// **'空闲 · 3 工具 · MySQL'**
+  String get agentDataState;
+
+  /// No description provided for @agentSupportName.
+  ///
+  /// In zh, this message translates to:
+  /// **'客服助理 Agent'**
+  String get agentSupportName;
+
+  /// No description provided for @agentSupportDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'渠道消息、FAQ、升级工单'**
+  String get agentSupportDescription;
+
+  /// No description provided for @agentSupportState.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行中 · 微信渠道 · 18 会话'**
+  String get agentSupportState;
+
+  /// No description provided for @agentLiveTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'Live 运行态'**
+  String get agentLiveTitle;
+
+  /// No description provided for @agentLiveAttention.
+  ///
+  /// In zh, this message translates to:
+  /// **'2 需关注'**
+  String get agentLiveAttention;
+
+  /// No description provided for @agentLiveRunningCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'12'**
+  String get agentLiveRunningCount;
+
+  /// No description provided for @agentLiveRunningLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行中'**
+  String get agentLiveRunningLabel;
+
+  /// No description provided for @agentLiveBlockedCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'3'**
+  String get agentLiveBlockedCount;
+
+  /// No description provided for @agentLiveBlockedLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'卡住'**
+  String get agentLiveBlockedLabel;
+
+  /// No description provided for @knowledgeKicker.
+  ///
+  /// In zh, this message translates to:
+  /// **'Knowledge'**
+  String get knowledgeKicker;
+
+  /// No description provided for @knowledgeTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'知识与记忆'**
+  String get knowledgeTitle;
+
+  /// No description provided for @knowledgeSearchHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索知识库、记忆和文档'**
+  String get knowledgeSearchHint;
+
+  /// No description provided for @knowledgeBaseCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'12'**
+  String get knowledgeBaseCount;
+
+  /// No description provided for @knowledgeBasesLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'知识库'**
+  String get knowledgeBasesLabel;
+
+  /// No description provided for @knowledgeMemoryCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'4.8k'**
+  String get knowledgeMemoryCount;
+
+  /// No description provided for @knowledgeMemoryLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'记忆条目'**
+  String get knowledgeMemoryLabel;
+
+  /// No description provided for @knowledgeBasesTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'知识库'**
+  String get knowledgeBasesTitle;
+
+  /// No description provided for @knowledgeLegalLibrary.
+  ///
+  /// In zh, this message translates to:
+  /// **'法务合同库'**
+  String get knowledgeLegalLibrary;
+
+  /// No description provided for @knowledgeLegalMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'326 文档 · 绑定 2 个 Agent'**
+  String get knowledgeLegalMeta;
+
+  /// No description provided for @knowledgeProductFaq.
+  ///
+  /// In zh, this message translates to:
+  /// **'产品 FAQ'**
+  String get knowledgeProductFaq;
+
+  /// No description provided for @knowledgeProductMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'1,240 片段 · 昨天更新'**
+  String get knowledgeProductMeta;
+
+  /// No description provided for @knowledgeRecentMemory.
+  ///
+  /// In zh, this message translates to:
+  /// **'近期记忆'**
+  String get knowledgeRecentMemory;
+
+  /// No description provided for @knowledgeMemoryPreference.
+  ///
+  /// In zh, this message translates to:
+  /// **'客户偏好：优先中文回复'**
+  String get knowledgeMemoryPreference;
+
+  /// No description provided for @knowledgeMemoryMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'客服助理 Agent · 自动沉淀'**
+  String get knowledgeMemoryMeta;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'设置'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsWorkspaceRole.
+  ///
+  /// In zh, this message translates to:
+  /// **'默认工作区 · 管理员'**
+  String get settingsWorkspaceRole;
+
+  /// No description provided for @settingsHealthTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'系统健康'**
+  String get settingsHealthTitle;
+
+  /// No description provided for @settingsHealthMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'API、队列、模型服务均正常'**
+  String get settingsHealthMeta;
+
+  /// No description provided for @settingsHealthBadge.
+  ///
+  /// In zh, this message translates to:
+  /// **'Healthy'**
+  String get settingsHealthBadge;
+
+  /// No description provided for @settingsCommonConfig.
+  ///
+  /// In zh, this message translates to:
+  /// **'常用配置'**
+  String get settingsCommonConfig;
+
+  /// No description provided for @settingsModelProviders.
+  ///
+  /// In zh, this message translates to:
+  /// **'模型提供商'**
+  String get settingsModelProviders;
+
+  /// No description provided for @settingsModelProvidersMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'8/10 已配置'**
+  String get settingsModelProvidersMeta;
+
+  /// No description provided for @settingsMcpTools.
+  ///
+  /// In zh, this message translates to:
+  /// **'MCP 与工具'**
+  String get settingsMcpTools;
+
+  /// No description provided for @settingsMcpToolsMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'24 工具'**
+  String get settingsMcpToolsMeta;
+
+  /// No description provided for @settingsChannelConnections.
+  ///
+  /// In zh, this message translates to:
+  /// **'渠道连接'**
+  String get settingsChannelConnections;
+
+  /// No description provided for @settingsChannelConnectionsMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'飞书、微信'**
+  String get settingsChannelConnectionsMeta;
+
+  /// No description provided for @settingsSecurity.
+  ///
+  /// In zh, this message translates to:
+  /// **'安全'**
+  String get settingsSecurity;
+
+  /// No description provided for @settingsPendingActions.
+  ///
+  /// In zh, this message translates to:
+  /// **'待审批动作'**
+  String get settingsPendingActions;
+
+  /// No description provided for @settingsPendingCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'3'**
+  String get settingsPendingCount;
+
+  /// No description provided for @settingsApprovalDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'高风险工具、文件访问和命令统一审批。'**
+  String get settingsApprovalDescription;
+
+  /// No description provided for @settingsApprovalQueue.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看审批队列'**
+  String get settingsApprovalQueue;
+
+  /// No description provided for @settingsWorkspaceSettings.
+  ///
+  /// In zh, this message translates to:
+  /// **'工作区设置'**
+  String get settingsWorkspaceSettings;
+
+  /// No description provided for @settingsDefaultWorkspace.
+  ///
+  /// In zh, this message translates to:
+  /// **'默认工作区'**
+  String get settingsDefaultWorkspace;
+
+  /// No description provided for @settingsWorkspaceMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'独立隔离 Agent、知识库、渠道与模型权限'**
+  String get settingsWorkspaceMeta;
+
+  /// No description provided for @settingsMembersChip.
+  ///
+  /// In zh, this message translates to:
+  /// **'6 成员'**
+  String get settingsMembersChip;
+
+  /// No description provided for @settingsRolesChip.
+  ///
+  /// In zh, this message translates to:
+  /// **'4 角色'**
+  String get settingsRolesChip;
+
+  /// No description provided for @settingsAgentsChip.
+  ///
+  /// In zh, this message translates to:
+  /// **'12 Agent'**
+  String get settingsAgentsChip;
+
+  /// No description provided for @settingsConfigureWorkspace.
+  ///
+  /// In zh, this message translates to:
+  /// **'设置工作区'**
+  String get settingsConfigureWorkspace;
+
+  /// No description provided for @settingsSwitchWorkspace.
+  ///
+  /// In zh, this message translates to:
+  /// **'切换'**
+  String get settingsSwitchWorkspace;
 }
 
 class _AppLocalizationsDelegate

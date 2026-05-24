@@ -211,4 +211,191 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatInputHint => 'Type a message or upload a file';
+
+  @override
+  String get agentKicker => 'Agent';
+
+  @override
+  String get agentTitle => 'Team';
+
+  @override
+  String get agentSegmentMembers => 'Members';
+
+  @override
+  String get agentSegmentLive => 'Live';
+
+  @override
+  String get agentContractName => 'Contract review Agent';
+
+  @override
+  String get agentContractDescription =>
+      'Contract risk detection, clause suggestions, approval summaries';
+
+  @override
+  String get agentOnline => 'Online';
+
+  @override
+  String get agentContractTools => '6 tools';
+
+  @override
+  String get agentDataName => 'Data analysis Agent';
+
+  @override
+  String get agentDataDescription =>
+      'Connect data sources and generate operating insights';
+
+  @override
+  String get agentDataState => 'Idle · 3 tools · MySQL';
+
+  @override
+  String get agentSupportName => 'Support assistant Agent';
+
+  @override
+  String get agentSupportDescription =>
+      'Channel messages, FAQ, escalation tickets';
+
+  @override
+  String get agentSupportState => 'Running · WeChat channel · 18 chats';
+
+  @override
+  String get agentLiveTitle => 'Live runs';
+
+  @override
+  String get agentLiveAttention => '2 need attention';
+
+  @override
+  String get agentLiveRunningCount => '12';
+
+  @override
+  String get agentLiveRunningLabel => 'Running';
+
+  @override
+  String get agentLiveBlockedCount => '3';
+
+  @override
+  String get agentLiveBlockedLabel => 'Blocked';
+
+  @override
+  String get knowledgeKicker => 'Knowledge';
+
+  @override
+  String get knowledgeTitle => 'Knowledge & Memory';
+
+  @override
+  String get knowledgeSearchHint =>
+      'Search knowledge bases, memories, and docs';
+
+  @override
+  String get knowledgeBaseCount => '12';
+
+  @override
+  String get knowledgeBasesLabel => 'Knowledge bases';
+
+  @override
+  String get knowledgeMemoryCount => '4.8k';
+
+  @override
+  String get knowledgeMemoryLabel => 'Memory items';
+
+  @override
+  String get knowledgeBasesTitle => 'Knowledge bases';
+
+  @override
+  String get knowledgeLegalLibrary => 'Legal contract library';
+
+  @override
+  String get knowledgeLegalMeta => '326 docs · 2 Agents connected';
+
+  @override
+  String get knowledgeProductFaq => 'Product FAQ';
+
+  @override
+  String get knowledgeProductMeta => '1,240 chunks · Updated yesterday';
+
+  @override
+  String get knowledgeRecentMemory => 'Recent memory';
+
+  @override
+  String get knowledgeMemoryPreference =>
+      'Customer preference: reply in Chinese first';
+
+  @override
+  String get knowledgeMemoryMeta => 'Support assistant Agent · Auto captured';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsWorkspaceRole => 'Default workspace · Admin';
+
+  @override
+  String get settingsHealthTitle => 'System health';
+
+  @override
+  String get settingsHealthMeta => 'API, queue, and model services are normal';
+
+  @override
+  String get settingsHealthBadge => 'Healthy';
+
+  @override
+  String get settingsCommonConfig => 'Common settings';
+
+  @override
+  String get settingsModelProviders => 'Model providers';
+
+  @override
+  String get settingsModelProvidersMeta => '8/10 configured';
+
+  @override
+  String get settingsMcpTools => 'MCP & tools';
+
+  @override
+  String get settingsMcpToolsMeta => '24 tools';
+
+  @override
+  String get settingsChannelConnections => 'Channel connections';
+
+  @override
+  String get settingsChannelConnectionsMeta => 'Lark, WeChat';
+
+  @override
+  String get settingsSecurity => 'Security';
+
+  @override
+  String get settingsPendingActions => 'Pending approvals';
+
+  @override
+  String get settingsPendingCount => '3';
+
+  @override
+  String get settingsApprovalDescription =>
+      'High-risk tools, file access, and commands require unified approval.';
+
+  @override
+  String get settingsApprovalQueue => 'View approval queue';
+
+  @override
+  String get settingsWorkspaceSettings => 'Workspace settings';
+
+  @override
+  String get settingsDefaultWorkspace => 'Default workspace';
+
+  @override
+  String get settingsWorkspaceMeta =>
+      'Isolate Agents, knowledge bases, channels, and model permissions';
+
+  @override
+  String get settingsMembersChip => '6 members';
+
+  @override
+  String get settingsRolesChip => '4 roles';
+
+  @override
+  String get settingsAgentsChip => '12 Agents';
+
+  @override
+  String get settingsConfigureWorkspace => 'Configure workspace';
+
+  @override
+  String get settingsSwitchWorkspace => 'Switch';
 }
