@@ -486,6 +486,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSwitchWorkspace => 'Switch';
 
   @override
+  String get settingsLogoutTitle => 'Sign out';
+
+  @override
+  String get settingsLogoutMeta => 'Clear local session and return to sign-in';
+
+  @override
   String get modelProvidersSubtitle =>
       'Manage providers, models, and routing in one place.';
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../routing/app_routes.dart';
 import 'workbench_chrome.dart';
+import '../viewmodel/settings_view_model.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -11,6 +13,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final viewModel = context.watch<SettingsViewModel>();
 
     return Scaffold(
       backgroundColor: WorkbenchColors.background,
@@ -32,7 +35,17 @@ class SettingsPage extends StatelessWidget {
                 y: 94,
                 width: 350,
                 height: 618,
-                child: _SettingsContent(l10n: l10n),
+                child: _SettingsContent(
+                  l10n: l10n,
+                  isLoggingOut: viewModel.isLoggingOut,
+                  onLogout: () async {
+                    await viewModel.logout();
+                    if (!context.mounted) {
+                      return;
+                    }
+                    context.go(AppRoutes.login);
+                  },
+                ),
               ),
               PrototypePositioned(
                 x: 0,
@@ -120,32 +133,44 @@ class _SettingsHeader extends StatelessWidget {
 }
 
 class _SettingsContent extends StatelessWidget {
-  const _SettingsContent({required this.l10n});
+  const _SettingsContent({
+    required this.l10n,
+    required this.isLoggingOut,
+    required this.onLogout,
+  });
 
   final AppLocalizations l10n;
+  final bool isLoggingOut;
+  final Future<void> Function() onLogout;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _SystemHealthCard(l10n: l10n),
-        const SizedBox(height: 9),
-        _SettingsSection(
-          title: l10n.settingsCommonConfig,
-          child: _SettingsList(l10n: l10n),
-        ),
-        const SizedBox(height: 9),
-        _SettingsSection(
-          title: l10n.settingsSecurity,
-          child: _SecurityCard(l10n: l10n),
-        ),
-        const SizedBox(height: 9),
-        _SettingsSection(
-          title: l10n.settingsWorkspaceSettings,
-          child: _WorkspaceCard(l10n: l10n),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _SystemHealthCard(l10n: l10n),
+          const SizedBox(height: 8),
+          _SettingsSection(
+            title: l10n.settingsCommonConfig,
+            child: _SettingsList(l10n: l10n),
+          ),
+          const SizedBox(height: 8),
+          _SettingsSection(
+            title: l10n.settingsSecurity,
+            child: _SecurityCard(l10n: l10n),
+          ),
+          const SizedBox(height: 8),
+          _SettingsSection(
+            title: l10n.settingsWorkspaceSettings,
+            gap: 7,
+            child: _WorkspaceCard(l10n: l10n),
+          ),
+          const SizedBox(height: 8),
+          _LogoutEntry(l10n: l10n, isLoggingOut: isLoggingOut, onTap: onLogout),
+        ],
+      ),
     );
   }
 }
@@ -158,7 +183,7 @@ class _SystemHealthCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 84,
+      height: 76,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: WorkbenchColors.dark,
@@ -194,10 +219,10 @@ class _SystemHealthCard extends StatelessWidget {
                     color: WorkbenchColors.surface,
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
-                    height: 1.2,
+                    height: 1.15,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 5),
                 Text(
                   l10n.settingsHealthMeta,
                   maxLines: 1,
@@ -225,16 +250,25 @@ class _SystemHealthCard extends StatelessWidget {
 }
 
 class _SettingsSection extends StatelessWidget {
-  const _SettingsSection({required this.title, required this.child});
+  const _SettingsSection({
+    required this.title,
+    required this.child,
+    this.gap = 6,
+  });
 
   final String title;
   final Widget child;
+  final double gap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [_SectionTitle(title), const SizedBox(height: 6), child],
+      children: [
+        _SectionTitle(title),
+        SizedBox(height: gap),
+        child,
+      ],
     );
   }
 }
@@ -323,7 +357,7 @@ class _SettingsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final row = SizedBox(
-      height: 46,
+      height: 40,
       child: Row(
         children: [
           const SizedBox(width: 16),
@@ -590,6 +624,91 @@ class _WorkspaceCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LogoutEntry extends StatelessWidget {
+  const _LogoutEntry({
+    required this.l10n,
+    required this.isLoggingOut,
+    required this.onTap,
+  });
+
+  final AppLocalizations l10n;
+  final bool isLoggingOut;
+  final Future<void> Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final content = Container(
+      height: 52,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: WorkbenchColors.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0x26FF3B30)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: const Color(0x14FF3B30),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.logout_outlined,
+              size: 19,
+              color: WorkbenchColors.red,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.settingsLogoutTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: WorkbenchColors.red,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  l10n.settingsLogoutMeta,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: WorkbenchColors.muted,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    height: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right, size: 17, color: WorkbenchColors.red),
+        ],
+      ),
+    );
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: isLoggingOut ? null : () => onTap(),
+        borderRadius: BorderRadius.circular(18),
+        child: Opacity(opacity: isLoggingOut ? 0.65 : 1, child: content),
       ),
     );
   }

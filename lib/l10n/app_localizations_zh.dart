@@ -471,6 +471,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsSwitchWorkspace => '切换';
 
   @override
+  String get settingsLogoutTitle => '退出登录';
+
+  @override
+  String get settingsLogoutMeta => '清除本机登录态并返回登录页';
+
+  @override
   String get modelProvidersSubtitle => '统一管理供应商、模型和路由';
 
   @override

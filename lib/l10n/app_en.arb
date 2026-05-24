@@ -154,6 +154,8 @@
   "settingsAgentsChip": "12 Agents",
   "settingsConfigureWorkspace": "Configure workspace",
   "settingsSwitchWorkspace": "Switch",
+  "settingsLogoutTitle": "Sign out",
+  "settingsLogoutMeta": "Clear local session and return to sign-in",
   "modelProvidersSubtitle": "Manage providers, models, and routing in one place.",
   "modelProviderCatalogTitle": "Choose provider type",
   "modelProviderCatalogSubtitle": "Pick a brand first, then fill in endpoint and key.",

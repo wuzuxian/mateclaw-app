@@ -17,6 +17,7 @@ import '../features/home/view/knowledge_page.dart';
 import '../features/home/view/settings_page.dart';
 import '../features/home/data/home_repository.dart';
 import '../features/home/viewmodel/home_view_model.dart';
+import '../features/home/viewmodel/settings_view_model.dart';
 import 'app_routes.dart';
 
 GoRouter createAppRouter(AuthSession authSession) {
@@ -81,7 +82,16 @@ GoRouter createAppRouter(AuthSession authSession) {
       ),
       GoRoute(
         path: AppRoutes.settings,
-        builder: (context, state) => const SettingsPage(),
+        builder: (context, state) {
+          return ChangeNotifierProvider(
+            create: (context) => SettingsViewModel(
+              authRepository: context.read<AuthRepository>(),
+              homeRepository: context.read<HomeRepository>(),
+              authSession: context.read<AuthSession>(),
+            ),
+            child: const SettingsPage(),
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.settingsModelProviders,

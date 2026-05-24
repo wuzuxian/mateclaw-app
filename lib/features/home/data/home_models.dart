@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class HomeDashboardData {
   const HomeDashboardData({
     required this.workspaceId,
@@ -38,12 +40,28 @@ class HomeUserProfile {
   factory HomeUserProfile.fromJson(Map<String, Object?> json) {
     return HomeUserProfile(
       id: _intValue(json['id']),
-      username: json['username'] as String? ?? '',
-      nickname: json['nickname'] as String? ?? '',
-      avatar: json['avatar'] as String?,
-      email: json['email'] as String?,
-      role: json['role'] as String? ?? '',
-      enabled: json['enabled'] as bool? ?? true,
+      username: _stringValue(
+        _pick(json, ['username', 'userName', 'user_name']),
+      ),
+      nickname: _stringValue(
+        _pick(json, ['nickname', 'nickName', 'nick_name']),
+      ),
+      avatar:
+          _stringValue(
+            _pick(json, ['avatar', 'avatarUrl', 'avatar_url']),
+          ).isEmpty
+          ? null
+          : _stringValue(_pick(json, ['avatar', 'avatarUrl', 'avatar_url'])),
+      email:
+          _stringValue(
+            _pick(json, ['email', 'emailAddress', 'email_address']),
+          ).isEmpty
+          ? null
+          : _stringValue(
+              _pick(json, ['email', 'emailAddress', 'email_address']),
+            ),
+      role: _stringValue(_pick(json, ['role', 'userRole', 'user_role'])),
+      enabled: _boolValue(json['enabled']) ?? true,
     );
   }
 
@@ -71,13 +89,19 @@ class HomeWorkspace {
   factory HomeWorkspace.fromJson(Map<String, Object?> json) {
     return HomeWorkspace(
       id: _intValue(json['id']),
-      name: json['name'] as String? ?? '',
-      slug: json['slug'] as String? ?? '',
-      role: json['role'] as String? ?? '',
-      isDefault: json['isDefault'] as bool? ?? false,
-      memberCount: _intValue(json['memberCount']),
-      roleCount: _intValue(json['roleCount']),
-      agentCount: _intValue(json['agentCount']),
+      name: _stringValue(
+        _pick(json, ['name', 'workspaceName', 'workspace_name']),
+      ),
+      slug: _stringValue(
+        _pick(json, ['slug', 'workspaceSlug', 'workspace_slug']),
+      ),
+      role: _stringValue(
+        _pick(json, ['role', 'workspaceRole', 'workspace_role']),
+      ),
+      isDefault: _boolValue(_pick(json, ['isDefault', 'is_default'])) ?? false,
+      memberCount: _intValue(_pick(json, ['memberCount', 'member_count'])),
+      roleCount: _intValue(_pick(json, ['roleCount', 'role_count'])),
+      agentCount: _intValue(_pick(json, ['agentCount', 'agent_count'])),
     );
   }
 
@@ -101,20 +125,10 @@ class HomeSnapshot {
 
   factory HomeSnapshot.fromJson(Map<String, Object?> json) {
     return HomeSnapshot(
-      currentModel: switch (json['currentModel']) {
-        final Map<String, Object?> value => HomeCurrentModel.fromJson(value),
-        _ => null,
-      },
-      todayCard: switch (json['todayCard']) {
-        final Map<String, Object?> value => HomeTodayCard.fromJson(value),
-        _ => const HomeTodayCard.empty(),
-      },
-      periods: _listOfMaps(
-        json['periods'],
-      ).map(HomePeriodStats.fromJson).toList(growable: false),
-      recentRuns: _listOfMaps(
-        json['recentRuns'],
-      ).map(HomeRecentRun.fromJson).toList(growable: false),
+      currentModel: _modelFromJson(json),
+      todayCard: _todayCardFromJson(json),
+      periods: _periodsFromJson(json),
+      recentRuns: _recentRunsFromJson(json),
     );
   }
 
@@ -135,11 +149,18 @@ class HomeCurrentModel {
 
   factory HomeCurrentModel.fromJson(Map<String, Object?> json) {
     return HomeCurrentModel(
-      providerId: json['providerId'] as String? ?? '',
-      providerName: json['providerName'] as String? ?? '',
-      model: json['model'] as String? ?? '',
-      status: json['status'] as String? ?? 'unknown',
-      statusText: json['statusText'] as String? ?? '',
+      providerId: _stringValue(_pick(json, ['providerId', 'provider_id'])),
+      providerName: _stringValue(
+        _pick(json, ['providerName', 'provider_name']),
+      ),
+      model: _stringValue(_pick(json, ['model', 'modelName', 'model_name'])),
+      status: _stringValue(
+        _pick(json, ['status', 'state']),
+        fallback: 'unknown',
+      ),
+      statusText: _stringValue(
+        _pick(json, ['statusText', 'status_text', 'stateText', 'state_text']),
+      ),
     );
   }
 
@@ -168,11 +189,29 @@ class HomeTodayCard {
 
   factory HomeTodayCard.fromJson(Map<String, Object?> json) {
     return HomeTodayCard(
-      conversations: _intValue(json['conversations']),
-      messages: _intValue(json['messages']),
-      toolCalls: _intValue(json['toolCalls']),
-      healthStatus: json['healthStatus'] as String? ?? 'unknown',
-      healthText: json['healthText'] as String? ?? '',
+      conversations: _intValue(
+        _pick(json, [
+          'conversations',
+          'conversationCount',
+          'conversation_count',
+        ]),
+      ),
+      messages: _intValue(
+        _pick(json, ['messages', 'messageCount', 'message_count']),
+      ),
+      toolCalls: _intValue(
+        _pick(json, [
+          'toolCalls',
+          'tool_calls',
+          'toolCallCount',
+          'tool_call_count',
+        ]),
+      ),
+      healthStatus: _stringValue(
+        _pick(json, ['healthStatus', 'health_status']),
+        fallback: 'unknown',
+      ),
+      healthText: _stringValue(_pick(json, ['healthText', 'health_text'])),
     );
   }
 
@@ -195,12 +234,38 @@ class HomePeriodStats {
 
   factory HomePeriodStats.fromJson(Map<String, Object?> json) {
     return HomePeriodStats(
-      key: json['key'] as String? ?? '',
-      title: json['title'] as String? ?? '',
-      conversations: _intValue(json['conversations']),
-      messages: _intValue(json['messages']),
-      totalTokens: _intValue(json['totalTokens']),
-      toolCalls: _intValue(json['toolCalls']),
+      key: _stringValue(_pick(json, ['key', 'periodKey', 'period_key'])),
+      title: _stringValue(
+        _pick(json, ['title', 'periodTitle', 'period_title']),
+      ),
+      conversations: _intValue(
+        _pick(json, [
+          'conversations',
+          'conversationCount',
+          'conversation_count',
+        ]),
+      ),
+      messages: _intValue(
+        _pick(json, ['messages', 'messageCount', 'message_count']),
+      ),
+      totalTokens: _intValue(
+        _pick(json, [
+          'totalTokens',
+          'total_tokens',
+          'totalToken',
+          'total_token',
+          'tokenCount',
+          'token_count',
+        ]),
+      ),
+      toolCalls: _intValue(
+        _pick(json, [
+          'toolCalls',
+          'tool_calls',
+          'toolCallCount',
+          'tool_call_count',
+        ]),
+      ),
     );
   }
 
@@ -228,14 +293,28 @@ class HomeRecentRun {
   factory HomeRecentRun.fromJson(Map<String, Object?> json) {
     return HomeRecentRun(
       id: _intValue(json['id']),
-      cronJobId: _nullableIntValue(json['cronJobId']),
-      title: json['title'] as String? ?? '',
-      status: json['status'] as String? ?? 'unknown',
-      statusText: json['statusText'] as String? ?? '',
-      startedAt: json['startedAt'] as String?,
-      timeText: json['timeText'] as String?,
-      tokenText: json['tokenText'] as String?,
-      detailText: json['detailText'] as String?,
+      cronJobId: _nullableIntValue(_pick(json, ['cronJobId', 'cron_job_id'])),
+      title: _stringValue(_pick(json, ['title', 'runTitle', 'run_title'])),
+      status: _stringValue(
+        _pick(json, ['status', 'state']),
+        fallback: 'unknown',
+      ),
+      statusText: _stringValue(
+        _pick(json, ['statusText', 'status_text', 'stateText', 'state_text']),
+      ),
+      startedAt: _stringValue(_pick(json, ['startedAt', 'started_at'])).isEmpty
+          ? null
+          : _stringValue(_pick(json, ['startedAt', 'started_at'])),
+      timeText: _stringValue(_pick(json, ['timeText', 'time_text'])).isEmpty
+          ? null
+          : _stringValue(_pick(json, ['timeText', 'time_text'])),
+      tokenText: _stringValue(_pick(json, ['tokenText', 'token_text'])).isEmpty
+          ? null
+          : _stringValue(_pick(json, ['tokenText', 'token_text'])),
+      detailText:
+          _stringValue(_pick(json, ['detailText', 'detail_text'])).isEmpty
+          ? null
+          : _stringValue(_pick(json, ['detailText', 'detail_text'])),
     );
   }
 
@@ -266,10 +345,206 @@ int? _nullableIntValue(Object? value) {
   };
 }
 
-List<Map<String, Object?>> _listOfMaps(Object? value) {
-  if (value is! List<Object?>) {
-    return const [];
+String _stringValue(Object? value, {String fallback = ''}) {
+  return switch (value) {
+    final String value when value.isNotEmpty => value,
+    final int value => value.toString(),
+    final bool value => value.toString(),
+    _ => fallback,
+  };
+}
+
+bool? _boolValue(Object? value) {
+  return switch (value) {
+    final bool value => value,
+    final int value => value != 0,
+    final String value => switch (value.toLowerCase()) {
+      'true' || '1' => true,
+      'false' || '0' => false,
+      _ => null,
+    },
+    _ => null,
+  };
+}
+
+HomeCurrentModel? _modelFromJson(Map<String, Object?> json) {
+  final modelJson = _mapValue(
+    _pick(json, ['currentModel', 'current_model', 'model']),
+  );
+  if (modelJson == null) {
+    return null;
+  }
+  return HomeCurrentModel.fromJson(modelJson);
+}
+
+HomeTodayCard _todayCardFromJson(Map<String, Object?> json) {
+  final todayCardJson = _mapValue(
+    _pick(json, ['todayCard', 'today_card', 'today', 'overview']),
+  );
+  if (todayCardJson == null) {
+    return const HomeTodayCard.empty();
+  }
+  return HomeTodayCard.fromJson(todayCardJson);
+}
+
+List<HomePeriodStats> _periodsFromJson(Map<String, Object?> json) {
+  final rawPeriods = _pick(json, ['periods', 'period_stats', 'periodStats']);
+  final list = _listValue(rawPeriods);
+  if (list != null) {
+    final periods = <HomePeriodStats>[];
+    final orderedKeys = ['today', 'thisWeek', 'thisMonth'];
+    for (var index = 0; index < list.length; index += 1) {
+      final item = list[index];
+      final periodJson = _mapValue(item);
+      if (periodJson == null) {
+        continue;
+      }
+      periods.add(
+        _periodFromJson(
+          periodJson,
+          fallbackKey: index < orderedKeys.length ? orderedKeys[index] : '',
+        ),
+      );
+    }
+    if (periods.isNotEmpty) {
+      return periods;
+    }
   }
 
-  return value.whereType<Map<String, Object?>>().toList(growable: false);
+  final map = _mapValue(rawPeriods);
+  if (map != null) {
+    final orderedKeys = ['today', 'thisWeek', 'thisMonth'];
+    final periods = <HomePeriodStats>[];
+    for (final key in orderedKeys) {
+      final periodJson = _mapValue(map[key]);
+      if (periodJson == null) {
+        continue;
+      }
+      periods.add(_periodFromJson(periodJson, fallbackKey: key));
+    }
+    if (periods.isNotEmpty) {
+      return periods;
+    }
+
+    for (final entry in map.entries) {
+      final periodJson = _mapValue(entry.value);
+      if (periodJson == null) {
+        continue;
+      }
+      periods.add(_periodFromJson(periodJson, fallbackKey: entry.key));
+    }
+    if (periods.isNotEmpty) {
+      return periods;
+    }
+  }
+
+  final periods = <HomePeriodStats>[];
+  for (final key in ['today', 'thisWeek', 'thisMonth']) {
+    final periodJson = _mapValue(json[key]);
+    if (periodJson == null) {
+      continue;
+    }
+    periods.add(_periodFromJson(periodJson, fallbackKey: key));
+  }
+  return periods;
+}
+
+List<HomeRecentRun> _recentRunsFromJson(Map<String, Object?> json) {
+  final rawRuns = _pick(json, ['recentRuns', 'recent_runs', 'runs']);
+  final candidates = [
+    rawRuns,
+    _mapValue(rawRuns)?['items'],
+    _mapValue(rawRuns)?['list'],
+    _mapValue(rawRuns)?['records'],
+  ];
+
+  for (final candidate in candidates) {
+    final list = _listValue(candidate);
+    if (list == null) {
+      continue;
+    }
+
+    return list
+        .map(_mapValue)
+        .whereType<Map<String, Object?>>()
+        .map(HomeRecentRun.fromJson)
+        .toList(growable: false);
+  }
+
+  return const [];
+}
+
+HomePeriodStats _periodFromJson(
+  Map<String, Object?> json, {
+  required String fallbackKey,
+}) {
+  final key = _stringValue(
+    _pick(json, ['key', 'periodKey', 'period_key']),
+    fallback: fallbackKey,
+  );
+  final title = _stringValue(
+    _pick(json, ['title', 'periodTitle', 'period_title']),
+    fallback: _defaultPeriodTitle(key),
+  );
+
+  return HomePeriodStats.fromJson({...json, 'key': key, 'title': title});
+}
+
+String _defaultPeriodTitle(String key) {
+  final normalized = key.replaceAll('_', '').toLowerCase();
+  return switch (normalized) {
+    'today' => '今日',
+    'thisweek' || 'week' => '本周',
+    'thismonth' || 'month' => '本月',
+    _ => key,
+  };
+}
+
+Map<String, Object?>? _mapValue(Object? value) {
+  if (value is Map<String, Object?>) {
+    return value;
+  }
+  if (value is Map) {
+    return value.map((key, value) => MapEntry(key.toString(), value));
+  }
+  if (value is String && value.isNotEmpty) {
+    try {
+      final decoded = jsonDecode(value);
+      if (decoded is Map) {
+        return decoded.map((key, value) => MapEntry(key.toString(), value));
+      }
+    } on FormatException {
+      return null;
+    }
+  }
+  return null;
+}
+
+List<Object?>? _listValue(Object? value) {
+  if (value is List<Object?>) {
+    return value;
+  }
+  if (value is List) {
+    return value.cast<Object?>();
+  }
+  if (value is String && value.isNotEmpty) {
+    try {
+      final decoded = jsonDecode(value);
+      if (decoded is List) {
+        return decoded.cast<Object?>();
+      }
+    } on FormatException {
+      return null;
+    }
+  }
+  return null;
+}
+
+Object? _pick(Map<String, Object?> json, List<String> keys) {
+  for (final key in keys) {
+    if (json.containsKey(key)) {
+      return json[key];
+    }
+  }
+  return null;
 }

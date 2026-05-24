@@ -470,7 +470,7 @@ class _PeriodComparison extends StatelessWidget {
         : periods
               .map(
                 (period) => _PeriodStatsData(
-                  title: period.title,
+                  title: _periodDisplayTitle(period, l10n),
                   conversations: period.conversations,
                   messages: period.messages,
                   totalTokens: period.totalTokens,
@@ -544,6 +544,20 @@ class _PeriodStatsData {
   final int toolCalls;
 
   List<int> get values => [conversations, messages, totalTokens, toolCalls];
+}
+
+String _periodDisplayTitle(HomePeriodStats period, AppLocalizations l10n) {
+  final title = period.title.trim();
+  if (title.isNotEmpty && title != period.key) {
+    return title;
+  }
+
+  return switch (period.key.replaceAll('_', '').toLowerCase()) {
+    'today' => l10n.homePeriodToday,
+    'thisweek' || 'week' => l10n.homePeriodWeek,
+    'thismonth' || 'month' => l10n.homePeriodMonth,
+    _ => title.isNotEmpty ? title : period.key,
+  };
 }
 
 class _PeriodStatsCard extends StatelessWidget {

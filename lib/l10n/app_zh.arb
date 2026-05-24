@@ -154,6 +154,8 @@
   "settingsAgentsChip": "12 Agent",
   "settingsConfigureWorkspace": "设置工作区",
   "settingsSwitchWorkspace": "切换",
+  "settingsLogoutTitle": "退出登录",
+  "settingsLogoutMeta": "清除本机登录态并返回登录页",
   "modelProvidersSubtitle": "统一管理供应商、模型和路由",
   "modelProviderCatalogTitle": "选择提供商类型",
   "modelProviderCatalogSubtitle": "先选品牌，再填写端点和密钥。",

@@ -1022,6 +1022,18 @@ abstract class AppLocalizations {
   /// **'切换'**
   String get settingsSwitchWorkspace;
 
+  /// No description provided for @settingsLogoutTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'退出登录'**
+  String get settingsLogoutTitle;
+
+  /// No description provided for @settingsLogoutMeta.
+  ///
+  /// In zh, this message translates to:
+  /// **'清除本机登录态并返回登录页'**
+  String get settingsLogoutMeta;
+
   /// No description provided for @modelProvidersSubtitle.
   ///
   /// In zh, this message translates to:
