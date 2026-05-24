@@ -197,6 +197,7 @@ class SectionPageHeader extends StatelessWidget {
     required this.kicker,
     required this.title,
     this.titleSize = 34,
+    this.leading,
     this.trailing,
     super.key,
   });
@@ -204,6 +205,7 @@ class SectionPageHeader extends StatelessWidget {
   final String kicker;
   final String title;
   final double titleSize;
+  final Widget? leading;
   final Widget? trailing;
 
   @override
@@ -211,6 +213,7 @@ class SectionPageHeader extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        if (leading != null) ...[leading!, const SizedBox(width: 12)],
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -253,25 +256,40 @@ class CircleIconButton extends StatelessWidget {
     required this.icon,
     required this.size,
     required this.iconSize,
+    this.onTap,
+    this.backgroundColor = WorkbenchColors.accent,
+    this.iconColor = WorkbenchColors.surface,
+    this.borderColor,
     super.key,
   });
 
   final IconData icon;
   final double size;
   final double iconSize;
+  final VoidCallback? onTap;
+  final Color backgroundColor;
+  final Color iconColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: WorkbenchColors.accent,
-      shape: const CircleBorder(),
+      color: Colors.transparent,
       child: InkWell(
-        onTap: () {},
+        onTap: onTap ?? () {},
         customBorder: const CircleBorder(),
-        child: SizedBox(
+        child: Container(
           width: size,
           height: size,
-          child: Icon(icon, size: iconSize, color: WorkbenchColors.surface),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            shape: BoxShape.circle,
+            border: borderColor == null
+                ? null
+                : Border.all(color: borderColor!),
+          ),
+          alignment: Alignment.center,
+          child: Icon(icon, size: iconSize, color: iconColor),
         ),
       ),
     );

@@ -853,6 +853,192 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'切换'**
   String get settingsSwitchWorkspace;
+
+  /// No description provided for @modelProvidersSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'统一管理供应商、模型和路由'**
+  String get modelProvidersSubtitle;
+
+  /// No description provided for @modelProviderCatalogTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'选择提供商类型'**
+  String get modelProviderCatalogTitle;
+
+  /// No description provided for @modelProviderCatalogSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'先选品牌，再填写端点和密钥。'**
+  String get modelProviderCatalogSubtitle;
+
+  /// No description provided for @modelProviderSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'管理端点、API Key 和默认模型。'**
+  String get modelProviderSubtitle;
+
+  /// No description provided for @modelProviderEndpoint.
+  ///
+  /// In zh, this message translates to:
+  /// **'端点'**
+  String get modelProviderEndpoint;
+
+  /// No description provided for @modelProviderApiKey.
+  ///
+  /// In zh, this message translates to:
+  /// **'API Key'**
+  String get modelProviderApiKey;
+
+  /// No description provided for @modelProviderDefaultModel.
+  ///
+  /// In zh, this message translates to:
+  /// **'默认模型'**
+  String get modelProviderDefaultModel;
+
+  /// No description provided for @modelProviderModelCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'模型数量'**
+  String get modelProviderModelCount;
+
+  /// No description provided for @modelProviderLatency.
+  ///
+  /// In zh, this message translates to:
+  /// **'延迟'**
+  String get modelProviderLatency;
+
+  /// No description provided for @modelProviderRouting.
+  ///
+  /// In zh, this message translates to:
+  /// **'路由'**
+  String get modelProviderRouting;
+
+  /// No description provided for @modelProviderModelsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'模型列表'**
+  String get modelProviderModelsTitle;
+
+  /// No description provided for @modelProviderModelsSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'按可用性和优先级排序。'**
+  String get modelProviderModelsSubtitle;
+
+  /// No description provided for @modelProviderViewModels.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看模型'**
+  String get modelProviderViewModels;
+
+  /// No description provided for @modelProviderAddProvider.
+  ///
+  /// In zh, this message translates to:
+  /// **'添加提供商'**
+  String get modelProviderAddProvider;
+
+  /// No description provided for @modelProviderTestConnection.
+  ///
+  /// In zh, this message translates to:
+  /// **'测试连接'**
+  String get modelProviderTestConnection;
+
+  /// No description provided for @modelProviderSave.
+  ///
+  /// In zh, this message translates to:
+  /// **'保存配置'**
+  String get modelProviderSave;
+
+  /// No description provided for @modelProviderAvailable.
+  ///
+  /// In zh, this message translates to:
+  /// **'可用'**
+  String get modelProviderAvailable;
+
+  /// No description provided for @modelProviderHealthy.
+  ///
+  /// In zh, this message translates to:
+  /// **'正常'**
+  String get modelProviderHealthy;
+
+  /// No description provided for @modelProviderMissingKey.
+  ///
+  /// In zh, this message translates to:
+  /// **'缺少密钥'**
+  String get modelProviderMissingKey;
+
+  /// No description provided for @modelProviderOffline.
+  ///
+  /// In zh, this message translates to:
+  /// **'离线'**
+  String get modelProviderOffline;
+
+  /// No description provided for @modelProviderDegraded.
+  ///
+  /// In zh, this message translates to:
+  /// **'异常'**
+  String get modelProviderDegraded;
+
+  /// No description provided for @modelProviderPrimary.
+  ///
+  /// In zh, this message translates to:
+  /// **'主'**
+  String get modelProviderPrimary;
+
+  /// No description provided for @modelProviderRecommended.
+  ///
+  /// In zh, this message translates to:
+  /// **'推荐'**
+  String get modelProviderRecommended;
+
+  /// No description provided for @modelProviderEnabled.
+  ///
+  /// In zh, this message translates to:
+  /// **'已启用'**
+  String get modelProviderEnabled;
+
+  /// No description provided for @modelProviderFilterAll.
+  ///
+  /// In zh, this message translates to:
+  /// **'全部'**
+  String get modelProviderFilterAll;
+
+  /// No description provided for @modelProviderFilterRecommended.
+  ///
+  /// In zh, this message translates to:
+  /// **'推荐'**
+  String get modelProviderFilterRecommended;
+
+  /// No description provided for @modelProviderFilterEnabled.
+  ///
+  /// In zh, this message translates to:
+  /// **'已启用'**
+  String get modelProviderFilterEnabled;
+
+  /// No description provided for @modelProviderConnectionSuccess.
+  ///
+  /// In zh, this message translates to:
+  /// **'连接正常'**
+  String get modelProviderConnectionSuccess;
+
+  /// No description provided for @modelProviderConnectionFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'连接失败'**
+  String get modelProviderConnectionFailed;
+
+  /// No description provided for @modelProviderHealthyCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'{count} 正常'**
+  String modelProviderHealthyCount(int count);
+
+  /// No description provided for @modelProviderEnabledCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'{count} 已启用'**
+  String modelProviderEnabledCount(int count);
 }
 
 class _AppLocalizationsDelegate

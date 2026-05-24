@@ -398,4 +398,101 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsSwitchWorkspace => 'Switch';
+
+  @override
+  String get modelProvidersSubtitle =>
+      'Manage providers, models, and routing in one place.';
+
+  @override
+  String get modelProviderCatalogTitle => 'Choose provider type';
+
+  @override
+  String get modelProviderCatalogSubtitle =>
+      'Pick a brand first, then fill in endpoint and key.';
+
+  @override
+  String get modelProviderSubtitle =>
+      'Manage endpoint, API key, and default model.';
+
+  @override
+  String get modelProviderEndpoint => 'Endpoint';
+
+  @override
+  String get modelProviderApiKey => 'API key';
+
+  @override
+  String get modelProviderDefaultModel => 'Default model';
+
+  @override
+  String get modelProviderModelCount => 'Models';
+
+  @override
+  String get modelProviderLatency => 'Latency';
+
+  @override
+  String get modelProviderRouting => 'Routing';
+
+  @override
+  String get modelProviderModelsTitle => 'Model list';
+
+  @override
+  String get modelProviderModelsSubtitle =>
+      'Sorted by availability and priority.';
+
+  @override
+  String get modelProviderViewModels => 'View models';
+
+  @override
+  String get modelProviderAddProvider => 'Add provider';
+
+  @override
+  String get modelProviderTestConnection => 'Test connection';
+
+  @override
+  String get modelProviderSave => 'Save changes';
+
+  @override
+  String get modelProviderAvailable => 'Available';
+
+  @override
+  String get modelProviderHealthy => 'Healthy';
+
+  @override
+  String get modelProviderMissingKey => 'Missing key';
+
+  @override
+  String get modelProviderOffline => 'Offline';
+
+  @override
+  String get modelProviderDegraded => 'Degraded';
+
+  @override
+  String get modelProviderPrimary => 'Primary';
+
+  @override
+  String get modelProviderRecommended => 'Recommended';
+
+  @override
+  String get modelProviderEnabled => 'Enabled';
+
+  @override
+  String get modelProviderFilterAll => 'All';
+
+  @override
+  String get modelProviderFilterRecommended => 'Recommended';
+
+  @override
+  String get modelProviderFilterEnabled => 'Enabled';
+
+  @override
+  String get modelProviderConnectionSuccess => 'Connection verified';
+
+  @override
+  String get modelProviderConnectionFailed => 'Connection failed';
+
+  @override
+  String modelProviderHealthyCount(int count) => '$count Healthy';
+
+  @override
+  String modelProviderEnabledCount(int count) => '$count Enabled';
 }

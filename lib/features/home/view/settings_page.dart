@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../routing/app_routes.dart';
@@ -281,6 +282,7 @@ class _SettingsList extends StatelessWidget {
               iconColor: WorkbenchColors.accent,
               title: l10n.settingsModelProviders,
               meta: l10n.settingsModelProvidersMeta,
+              onTap: () => context.push(AppRoutes.settingsModelProviders),
             ),
             const _DividerLine(),
             _SettingsRow(
@@ -309,16 +311,18 @@ class _SettingsRow extends StatelessWidget {
     required this.iconColor,
     required this.title,
     required this.meta,
+    this.onTap,
   });
 
   final IconData icon;
   final Color iconColor;
   final String title;
   final String meta;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    final row = SizedBox(
       height: 46,
       child: Row(
         children: [
@@ -358,6 +362,19 @@ class _SettingsRow extends StatelessWidget {
           ),
           const SizedBox(width: 16),
         ],
+      ),
+    );
+
+    if (onTap == null) {
+      return row;
+    }
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(22),
+        child: row,
       ),
     );
   }

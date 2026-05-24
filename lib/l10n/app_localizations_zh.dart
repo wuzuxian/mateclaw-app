@@ -385,4 +385,97 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsSwitchWorkspace => '切换';
+
+  @override
+  String get modelProvidersSubtitle => '统一管理供应商、模型和路由';
+
+  @override
+  String get modelProviderCatalogTitle => '选择提供商类型';
+
+  @override
+  String get modelProviderCatalogSubtitle => '先选品牌，再填写端点和密钥。';
+
+  @override
+  String get modelProviderSubtitle => '管理端点、API Key 和默认模型。';
+
+  @override
+  String get modelProviderEndpoint => '端点';
+
+  @override
+  String get modelProviderApiKey => 'API Key';
+
+  @override
+  String get modelProviderDefaultModel => '默认模型';
+
+  @override
+  String get modelProviderModelCount => '模型数量';
+
+  @override
+  String get modelProviderLatency => '延迟';
+
+  @override
+  String get modelProviderRouting => '路由';
+
+  @override
+  String get modelProviderModelsTitle => '模型列表';
+
+  @override
+  String get modelProviderModelsSubtitle => '按可用性和优先级排序。';
+
+  @override
+  String get modelProviderViewModels => '查看模型';
+
+  @override
+  String get modelProviderAddProvider => '添加提供商';
+
+  @override
+  String get modelProviderTestConnection => '测试连接';
+
+  @override
+  String get modelProviderSave => '保存配置';
+
+  @override
+  String get modelProviderAvailable => '可用';
+
+  @override
+  String get modelProviderHealthy => '正常';
+
+  @override
+  String get modelProviderMissingKey => '缺少密钥';
+
+  @override
+  String get modelProviderOffline => '离线';
+
+  @override
+  String get modelProviderDegraded => '异常';
+
+  @override
+  String get modelProviderPrimary => '主';
+
+  @override
+  String get modelProviderRecommended => '推荐';
+
+  @override
+  String get modelProviderEnabled => '已启用';
+
+  @override
+  String get modelProviderFilterAll => '全部';
+
+  @override
+  String get modelProviderFilterRecommended => '推荐';
+
+  @override
+  String get modelProviderFilterEnabled => '已启用';
+
+  @override
+  String get modelProviderConnectionSuccess => '连接正常';
+
+  @override
+  String get modelProviderConnectionFailed => '连接失败';
+
+  @override
+  String modelProviderHealthyCount(int count) => '$count 正常';
+
+  @override
+  String modelProviderEnabledCount(int count) => '$count 已启用';
 }

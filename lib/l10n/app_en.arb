@@ -125,5 +125,46 @@
   "settingsRolesChip": "4 roles",
   "settingsAgentsChip": "12 Agents",
   "settingsConfigureWorkspace": "Configure workspace",
-  "settingsSwitchWorkspace": "Switch"
+  "settingsSwitchWorkspace": "Switch",
+  "modelProvidersSubtitle": "Manage providers, models, and routing in one place.",
+  "modelProviderCatalogTitle": "Choose provider type",
+  "modelProviderCatalogSubtitle": "Pick a brand first, then fill in endpoint and key.",
+  "modelProviderSubtitle": "Manage endpoint, API key, and default model.",
+  "modelProviderEndpoint": "Endpoint",
+  "modelProviderApiKey": "API key",
+  "modelProviderDefaultModel": "Default model",
+  "modelProviderModelCount": "Models",
+  "modelProviderLatency": "Latency",
+  "modelProviderRouting": "Routing",
+  "modelProviderModelsTitle": "Model list",
+  "modelProviderModelsSubtitle": "Sorted by availability and priority.",
+  "modelProviderViewModels": "View models",
+  "modelProviderAddProvider": "Add provider",
+  "modelProviderTestConnection": "Test connection",
+  "modelProviderSave": "Save changes",
+  "modelProviderAvailable": "Available",
+  "modelProviderHealthy": "Healthy",
+  "modelProviderMissingKey": "Missing key",
+  "modelProviderOffline": "Offline",
+  "modelProviderDegraded": "Degraded",
+  "modelProviderPrimary": "Primary",
+  "modelProviderRecommended": "Recommended",
+  "modelProviderEnabled": "Enabled",
+  "modelProviderFilterAll": "All",
+  "modelProviderFilterRecommended": "Recommended",
+  "modelProviderFilterEnabled": "Enabled",
+  "modelProviderConnectionSuccess": "Connection verified",
+  "modelProviderConnectionFailed": "Connection failed",
+  "modelProviderHealthyCount": "{count} Healthy",
+  "@modelProviderHealthyCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "modelProviderEnabledCount": "{count} Enabled",
+  "@modelProviderEnabledCount": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

@@ -125,5 +125,46 @@
   "settingsRolesChip": "4 角色",
   "settingsAgentsChip": "12 Agent",
   "settingsConfigureWorkspace": "设置工作区",
-  "settingsSwitchWorkspace": "切换"
+  "settingsSwitchWorkspace": "切换",
+  "modelProvidersSubtitle": "统一管理供应商、模型和路由",
+  "modelProviderCatalogTitle": "选择提供商类型",
+  "modelProviderCatalogSubtitle": "先选品牌，再填写端点和密钥。",
+  "modelProviderSubtitle": "管理端点、API Key 和默认模型。",
+  "modelProviderEndpoint": "端点",
+  "modelProviderApiKey": "API Key",
+  "modelProviderDefaultModel": "默认模型",
+  "modelProviderModelCount": "模型数量",
+  "modelProviderLatency": "延迟",
+  "modelProviderRouting": "路由",
+  "modelProviderModelsTitle": "模型列表",
+  "modelProviderModelsSubtitle": "按可用性和优先级排序。",
+  "modelProviderViewModels": "查看模型",
+  "modelProviderAddProvider": "添加提供商",
+  "modelProviderTestConnection": "测试连接",
+  "modelProviderSave": "保存配置",
+  "modelProviderAvailable": "可用",
+  "modelProviderHealthy": "正常",
+  "modelProviderMissingKey": "缺少密钥",
+  "modelProviderOffline": "离线",
+  "modelProviderDegraded": "异常",
+  "modelProviderPrimary": "主",
+  "modelProviderRecommended": "推荐",
+  "modelProviderEnabled": "已启用",
+  "modelProviderFilterAll": "全部",
+  "modelProviderFilterRecommended": "推荐",
+  "modelProviderFilterEnabled": "已启用",
+  "modelProviderConnectionSuccess": "连接正常",
+  "modelProviderConnectionFailed": "连接失败",
+  "modelProviderHealthyCount": "{count} 正常",
+  "@modelProviderHealthyCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "modelProviderEnabledCount": "{count} 已启用",
+  "@modelProviderEnabledCount": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }
